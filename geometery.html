@@ -1,0 +1,245 @@
+<!-- Matthew Malone -->
+<!-- Last Updated 2/18/2021 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbox</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-11C4CME50R"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-11C4CME50R');
+   </script>
+   
+</head>
+<body>
+
+  <!--Navigation bar-->
+  <div id="nav-placeholder"></div>
+  <script>
+    $(document).ready(function(){   
+          $(function(){
+        $("#nav-placeholder").load("common/nav.html");
+      });
+     });
+  </script>
+
+ 
+<!-- Calc Box -->
+  <div class="grid-section grid">
+    <div class="code-area">
+
+      <div class="box">
+        <div class="wrapper wrapper--w680">
+          <div class="card card-4">
+            <div class="card-body">
+              <h2 class="title">Geometry</h2>
+
+
+            <!-- Solve Selection -->
+            <div class="row row-space">
+              <div class="input-group">
+                <label class="label">Calculate volume for</label>
+                <div class="p-t-10">
+                    <label class="radio-container m-r-45">Cylinder
+                        <input type="radio" checked="checked" id="input_sel_vel" name="input_sel" onclick="toggleInputCylinder()">
+                        <span class="checkmark"></span>
+                    </label>                  
+                    <label class="radio-container">Hemisphere
+                      <input type="radio" id="input_sel_flow" name="input_sel" onclick="toggleInputHemi()">
+                      <span class="checkmark"></span>
+                  </label>
+                    <label class="radio-container">Cone
+                        <input type="radio" id="input_sel_flow" name="input_sel" onclick="toggleInputCylinder()">
+                        <span class="checkmark"></span>
+                    </label>
+  
+                  <label class="radio-container">Box
+                    <input type="radio" id="input_sel_flow" name="input_sel" onclick="toggleInputCube()">
+                    <span class="checkmark"></span>
+                </label>
+                </div>
+            </div>
+            </div>
+
+
+            <!-- Inputs -->
+
+
+              <div class="row row-space" id="input-diameter">
+                <div class="col-2">
+                    <div class="input-group">
+                        <label class="label">Diameter</label>
+                        <input class="input--style-4" type="number" value=6 step="1" name="flow_rate" id="input_diameter" onchange="resetAnswerBlock()">
+                    </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-group">
+                    <label class="label transparent">Unit</label>
+                        <select class="input-style-1" name="unit" id="unit_diameter">
+                            <option>ft</option>
+                            <option>in</option>
+                            <option>m</option>
+                            <option>cm</option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                </div>
+                </div>
+            </div>
+
+            <div class="row row-space" id="input-height">
+              <label class="label">Height</label>
+              <div class="col-2">
+                  <div class="input-group">
+                      <input class="input--style-4" type="number" value=10 step="1" name="flow_rate" id="input_height" onchange="resetAnswerBlock()">
+                  </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                      <select class="input-style-1" name="unit" id="unit_height">
+                        <option>ft</option>
+                        <option>in</option>
+                        <option>m</option>
+                        <option>cm</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+              </div>
+              </div>
+          </div>
+
+          <div class="row row-space hidden" id="input-width">
+            <label class="label">Width</label>
+            <div class="col-2">
+                <div class="input-group">
+                    <input class="input--style-4" type="number" value=12 step="1" name="flow_rate" id="input_width" onchange="">
+                </div>
+            </div>
+            <div class="col-2">
+              <div class="input-group">
+                    <select class="input-style-1" name="unit" id="unit_width">
+                      <option>ft</option>
+                      <option>in</option>
+                      <option>m</option>
+                      <option>cm</option>
+                    </select>
+                    <div class="select-dropdown"></div>
+            </div>
+            </div>
+        </div>
+
+        <div class="row row-space hidden" id="input-depth">
+          <label class="label">Depth</label>
+          <div class="col-2">
+              <div class="input-group">
+                  <input class="input--style-4" type="number" value=8 step="1" name="flow_rate" id="input_depth" onchange="">
+              </div>
+          </div>
+          <div class="col-2">
+            <div class="input-group">
+                  <select class="input-style-1" name="unit" id="unit_depth">
+                    <option>ft</option>
+                    <option>in</option>
+                    <option>m</option>
+                    <option>cm</option>
+                  </select>
+                  <div class="select-dropdown"></div>
+          </div>
+          </div>
+      </div>
+
+       
+
+<!-- Calc Button -->
+                <div class="button-row">
+                    <button class="btn btn--radius-2 btn--blue" onclick="solveCylinder()">Calculate</button>
+                </div>
+
+ <!-- Error Text -->
+            <div class="row row-space hidden" id="error-text-box">
+                <P id="error-text">Error</P>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Answer Block -->
+
+
+  <div class="wrapper wrapper--w680 box hidden" id="answer-block">
+  <div class="card card-4">
+    <div class="card-body">
+      <h2 class="title"> Answer</h2>
+
+
+      <div class="row row-space hidden" id="answer-block-volume">
+        <label class="label">Volume</label>
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label--style-4" id="answer-volume">5.0</label>
+            </div>
+        </div>
+           <div class="col-2">
+              <select class="input-style-1" name="unit" id="unit-volume" onchange="changeAnswerVolumeUnits()">   
+                <option>l</option>
+                 <option>gal</option>
+                <option>ft³</option>
+                <option>m³</option>
+            </select>
+             </div>
+      </div>
+
+      
+
+    </div>
+
+  </div>
+</div>
+
+
+      <!-- Governing Equation Box -->
+        <div class="box white" id="equationDescription">
+          <div class="card-body-2">
+            <button class="accordion-header">Governing Equations</button>
+            <div class="accordian">
+
+              <p>
+                Cylinder:
+                \[V = \pi*r^2*h\]
+                Hemisphere:
+                \[V = \frac{2}{3}*\pi*r^3\]
+                Cone:
+                \[V = \frac{h}{3}*\pi*r^2\]
+                Box:
+                \[V = h*w*d\]
+        
+            
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+      <br>
+    </div>
+    </div>
+  </div>
+</div>
+
+  <script src="scripts/index.js"></script>
+  <script src="scripts/unitConversions.js"></script>
+  <script src="scripts/geometery.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+</body>
+</html>

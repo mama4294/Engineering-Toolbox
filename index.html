@@ -1,0 +1,229 @@
+<!-- Matthew Malone -->
+<!-- Last Updated 5/06/2021 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+  <link rel="shortcut icon">
+
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="stylesheet" type="text/css" href="styles/home.css" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Primary Meta Tags -->
+  <title>Engineering Toolbox | Matthew Malone</title>
+  <meta name="title" content="Matthew Malone's Engineering Toolbox">
+  <meta name="description" content="Online calculators for process, electrical, and controls engineering">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://matthewmalone.com/">
+  <meta property="og:title" content="Matthew Malone's Engineering Toolbox">
+  <meta property="og:description" content="Online calculators for process, electrical, and controls engineering">
+  <meta property="og:image" content="http://matthewmalone.com/images/MainPagePic.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="http://matthewmalone.com/">
+  <meta property="twitter:title" content="Matthew Malone's Engineering Toolbox">
+  <meta property="twitter:description" content="Online calculators for process, electrical, and controls engineering">
+  <meta property="twitter:image" content="ihttp://matthewmalone.com/images/MainPagePic.png">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-11C4CME50R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-11C4CME50R');
+  </script>
+
+
+</head>
+<body>
+
+<!-- Header -->
+
+
+  <!-- Nav Bar -->
+
+    <div class="topnav home" id="myTopnav">
+      <a href="index.html" class="toolbox active white-text">Toolbox</a>
+      <div class="dropdown">
+        <button class="dropbtn homebtn">Fluid Dyanmics
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="pipeflow.html">Fluid Velocity</a>
+          <a href="Reynolds.html">Reynolds Number</a>
+          <a href="frictionfact.html">Friction Factor</a>
+          <a href="pressure_drop.html">Pressure Drop</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn homebtn">Heat Transfer
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="lmtd.html">Log Mean Temperature</a>
+          <a href="heatExchanger.html">Heat Exchanger Sizing</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn homebtn">General
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="linearIntorpolation.html">Linear Interpolation</a>
+          <a href="420mA.html">4-20 mA</a>
+          <a href="geometery.html">Geometery</a>
+          <a href="tipSpeed.html">Tip Speed</a>
+        </div>
+      </div>
+      <a href="javascript:void(0);" class="icon" onclick="toggleHamburgerHome()">&#9776;</a>
+    </div>
+
+  <!-- Home Title -->
+    <div class="grid-section grid">
+      <div class="code-area">
+
+        <div class="box">
+          <div class="wrapper no-shadow">
+            <div class="card background-transparent">
+              <div class="card-body ">
+            <h2 class="title title-top white-text"> Engineering Toolbox</h2>
+            <h4 class="grid-sublabel white-text"> Online calculators for process, electrical, and controls engineering</h2>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+      </div>
+
+  <!-- Background -->
+  <div class="front-page-background">
+  <div class="background-container" id="background-img"></div>
+   <div class="triangle-container" id="background-triangle">
+    <svg fill="white" preserveAspectRatio="none" viewBox="0 0 25 100" class="triangle">
+      <polygon points="0,100 25,0 25,100"></polygon>
+    </svg>
+
+  </div>
+  </div>
+<!-- Calculator Gallery-->
+
+
+<section class="container">
+  <div class="wrapper no-shadow">
+    <div class="item-row">
+
+      <div class="grid-item">  
+        <a href="pipeflow.html" class="fill-div">  
+        <h2 class="grid-label">Fluid Flow</h2>
+        <h2 class="grid-sublabel">Calculate fluid velocity in a pipe</h3>
+        </a>
+      </div>
+
+      <div class="grid-item">  
+        <a href="Reynolds.html" class="fill-div">  
+        <h2 class="grid-label">Reynolds Number</h2>
+        <h2 class="grid-sublabel">Calculate dimentionless Reynolds Number</h3>
+        </a>
+      </div>
+
+      <div class="grid-item">  
+        <a href="frictionfact.html" class="fill-div">  
+        <h2 class="grid-label">Friction Factor</h2>
+        <h2 class="grid-sublabel">Calculate the Darcy Friction Factor</h3>
+        </a>
+      </div>
+
+      <div class="grid-item">  
+        <a href="pressure_drop.html" class="fill-div">  
+        <h2 class="grid-label">Pressure Drop</h2>
+        <h2 class="grid-sublabel">Calculate pressure drop in a pipe</h3>
+        </a>
+      </div>
+
+      <div class="grid-item">  
+        <a href="lmtd.html" class="fill-div">  
+        <h2 class="grid-label">LMDT</h2>
+        <h2 class="grid-sublabel">Calculate Log Mean Temp Difference</h3>
+        </a>
+      </div>
+
+      <div class="grid-item">  
+        <a href="linearIntorpolation.html" class="fill-div">  
+        <h2 class="grid-label">Linear Interpolation</h2>
+        <h2 class="grid-sublabel">Calculate any point along a line</h3>
+        </a>
+      </div>
+
+      <div class="grid-item">  
+        <a href="heatExchanger.html" class="fill-div">  
+        <h2 class="grid-label">Heat Exchanger Sizing</h2>
+        <h2 class="grid-sublabel">Size a heat exchanger</h3>
+        </a>
+      </div>
+
+      <div class="grid-item">  
+        <a href="420mA.html" class="fill-div">  
+        <h2 class="grid-label">4-20mA Calculator</h2>
+        <h2 class="grid-sublabel">Calculate the current for a control loop</h3>
+        </a>
+      </div>
+
+      <div class="grid-item">  
+        <a href="geometery.html" class="fill-div">  
+        <h2 class="grid-label">Geometery</h2>
+        <h2 class="grid-sublabel">Calculate tank volume</h3>
+        </a>
+      </div>
+
+      <div class="grid-item">  
+        <a href="tipSpeed.html" class="fill-div">  
+        <h2 class="grid-label">Agitation</h2>
+        <h2 class="grid-sublabel">Calculate agitator tip speed</h3>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <div class="grid-section grid">
+    <div class="code-area">
+
+      <div class="box">
+        <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+          <div class="card-body">
+            <h2 class="subtitle"> About Me</h2>
+            <p>I'm an engineer in Denver, Colorado. I work in the food and beverage industry an enjoy making complex calculations easy to use.</p>
+            <br>
+            <p>I converted my commonly used calculations into a website for easy access for myself and others. </p>
+           
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+    </div>
+    <br>
+    </div>
+  </div>
+</div>
+
+  <script src="scripts/index.js"></script>
+  <!-- <script src="scripts/jquery.js"></script> -->
+  <script src="scripts/unitConversions.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

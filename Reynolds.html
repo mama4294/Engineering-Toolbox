@@ -1,0 +1,331 @@
+<!-- Matthew Malone -->
+<!-- Last Updated 2/18/2021 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbox</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-11C4CME50R"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-11C4CME50R');
+   </script>
+   
+</head>
+<body>
+
+  <!--Navigation bar-->
+  <div id="nav-placeholder"></div>
+  <script>
+    $(document).ready(function(){   
+          $(function(){
+        $("#nav-placeholder").load("common/nav.html");
+      });
+     });
+  </script>
+
+ 
+<!-- Calc Box -->
+  <div class="grid-section grid">
+    <div class="code-area">
+
+      <div class="box">
+        <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+          <div class="card-body">
+            <h2 class="title"> Reynolds Number Calculator</h2>
+
+
+          <div class="row row-space" id="input-block-flow">
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">Flow Rate</label>
+                    <input class="input--style-4" type="number" value=60 step="1" name="flow_rate" id="input_flow">
+                </div>
+            </div>
+            <div class="col-2">
+              <div class="input-group">
+                <label class="label transparent">Unit</label>
+                    <select class="input-style-1" name="unit" id="unit_flow">
+                        <option>lpm</option>
+                        <option>gpm</option>
+                    </select>
+                    <div class="select-dropdown"></div>
+            </div>
+            </div>
+        </div>
+
+        <div class="row row-space" id="input-block-diameter">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Outer Diameter</label>
+                  <input class="input--style-4" type="number" value=1.5 step="0.5" name="flow_rate" id="input_diameter">
+              </div>
+          </div>
+
+          <div class="col-2">
+            <div class="input-group">
+              <label class="label transparent">Unit</label>
+                  <select class="input-style-1" name="unit" id="unit_diameter">
+                      <option>in</option>
+                      <option>cm</option>
+                  </select>
+                  <div class="select-dropdown"></div>
+          </div>
+          </div>
+      </div>
+
+
+      <div class="row row-space" id="input-block-thickness">
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label">Pipe Thickness</label>
+                <input class="input--style-4" type="number" value=0.065 step="0.001" name="flow_rate" id="input_thickness">
+            </div>
+        </div>
+        
+        <div class="col-2">
+          <div class="input-group">
+            <label class="label transparent">Unit</label>
+                <select class="input-style-1" name="unit" id="unit_thickness">
+                    <option>in</option>
+                    <option>cm</option>
+                </select>
+                <div class="select-dropdown"></div>
+        </div>
+        </div>
+    </div>
+
+
+    <div class="row row-space" id="input-block-density">
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label">Fluid Density</label>
+                <input class="input--style-4" type="number" value=1000 step="1" name="density" id="input_density">
+            </div>
+        </div>
+        <div class="col-2">
+          <div class="input-group">
+            <label class="label transparent">Unit</label>
+                <select class="input-style-1" name="unit" id="unit_density">
+                    <option>kg/m³</option>
+                    <option>kg/L</option>
+                    <option>g/cm³</option>
+                    <option>lb/ft³</option>
+                </select>
+                <div class="select-dropdown"></div>
+        </div>
+        </div>
+    </div>
+
+    <div class="row row-space" id="input-block-viscosity">
+      <div class="col-2">
+          <div class="input-group">
+              <label class="label">Fluid Viscosity</label>
+              <input class="input--style-4" type="number" value=1 step="1" name="viscosity" id="input_viscosity">
+          </div>
+      </div>
+      <div class="col-2">
+        <div class="input-group">
+          <label class="label transparent">Unit</label>
+              <select class="input-style-1" name="unit" id="unit_viscosity">
+                  <option>cP</option>
+                  <option>Pas</option>
+                  <option>lbm/ft/s</option>
+              </select>
+              <div class="select-dropdown"></div>
+      </div>
+      </div>
+  </div>
+
+
+<!-- Calc Button -->
+                <div class="button-row">
+                    <button class="btn btn--radius-2 btn--blue" onclick="solveReynolds()">Calculate</button>
+                </div>
+
+ <!-- Error Text -->
+ <div class="row row-space hidden" id="error-text-box">
+  <P id="error-text">Error</P>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Answer Block -->
+<div class="wrapper wrapper--w680 box hidden" id="answer-block">
+  <div class="card card-4">
+    <div class="card-body">
+      <h2 class="title"> Answer</h2>
+
+        <div class="row row-space" id="answer-block-vel">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Reynolds Number</label>
+                  <label class="label--style-4" id="answer-Re">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <label class="label--style-4">Unitless</label>
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+        <div class="row row-space" id="answer-block-flow">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Flow Regime</label>
+                  <label class="label--style-4" id="answer-regime">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <label class="label--style-4">Unitless</label>
+
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+
+    </div>
+
+  </div>
+</div>
+
+  </div>
+  
+
+      <!-- Governing Equation Box -->
+        <div class="box white" id="equationDescription">
+          <div class="card-body-2">
+            <button class="accordion-header">Governing Equations</button>
+            <div class="accordian">
+          <P>This Reynolds number (Re) calculator describes how fluid will flow in a pipe. Based on the value, the fluid flow can be charaterized into one of three flow regimes: Laminar, Transition, and Turbulent.  </P>
+              <ul>
+                <li>
+                  <strong>Laminar Flow Regime</strong> Re < 2000: A bullet shaped flow profile. The fluid in the center of the pipe flows the fastest and the flow near the pipe wall flows the slowest. 
+                </li>
+                <li>
+                  <strong>Transition Flow Regime</strong> 2000 > Re > 4000: A poorly charaterized flow regime which is neither laminar nor turbulent. 
+                </li>
+                <li>
+                  <strong>Turbulent Flow Regime</strong> Re > 4000: A flat line shaped flow profile. The fluid in the center of the pipe swirls with the edge flow and they both move at relatively the same speed. 
+                </li>
+              </ul>
+              <P>This Reynolds number is a function of pipe geometery, flow rate, fluid density, and fluid viscosity </P>
+              <p>
+                \[Re = \frac{u * d_i * \rho}{\mu}\]
+              </p>
+          <p>The inner pipe diameter can be found using the outer diamter and pipe thickness </p>
+          <p>
+              \[d_i = d_o - 2* x_w\]
+             </p>
+             <p>The fluid velocity can be found using fluid flow rate and pipe geometery </p>
+          <p>
+            \[v =  Q / A_i\]
+             </p>
+          
+          <h3>Definitions</h3>
+          <P>
+            \(v\) = Fluid Velocity
+            <br>
+              Q = Fluid Flow Rate
+              <br>
+              \(d_o\) = Pipe Outer Diameter
+              <br>
+              \(d_i\) = Pipe Inner Diameter
+              <br>
+              \(x_w\) = Pipe wall thickness
+              <br>
+              \(r_i\) = Pipe Inner Radius
+              <br>
+              \(A_i\) = Pipe Inner Cross-sectional Area
+              <br>
+              ρ = Fluid Density
+              <br>
+              μ = Fluid Dynamic Viscosity
+              <br>
+              Re = Reynolds Dimentionless Number
+     
+ 
+          </P>
+        </div>
+        </div>
+      </div>
+
+          <!-- Example Box -->
+          <div class="box white" id="applicationDescription">
+            <div class="card-body-2">
+            <button class="accordion-header">Example</button>
+            <div class="accordian">
+              <p>Find the flow regime for water (1000 kg/m³ and 1 cP) in a 1.5" OD tube (0.065" wall thickness) flowing at 60lpm.</p>
+              <P>
+                <P>Calculate inner pipe diameter:
+                \[ d_i = d_o - 2 \times x_w\] 
+                \[ d_i = 1.5" - 2\times0.065" = 1.37\text{ in}\] 
+                \[ d_i = 1.37\text{ in} \times  \frac{1\text{ ft}}{12\text{ in} } = 0.114 \text{ ft}\] 
+                Calculate inner pipe area:
+                \[A_i =  \pi \times r_i^2 = \pi \times \left(\frac{d_i}{2}\right)^2 \]
+                \[A_i = \pi \times \left(\frac{0.114\text{ ft}}{2}\right)^2 =0.01\text{ ft²} \]
+                Calculate fluid velocity:
+                \[v =  \frac{Q}{A_i}\]
+                \[v = \frac{60 \frac{L}{min} \times \frac{1 \text{ft³}}{28.3 \text{L}} \times \frac{60 sec}{min} }{0.01\text{ ft²}} = 3.45 \text{ ft/s}\]
+                Calculate Reynolds number:
+                \[ Re = \frac{v \times d_i \times \rho}{\mu}\]
+                \[ \rho = 1000 \text{ kg/m³} \times \frac{1 \text{lb/ft³}}{16.02 \text{ kg/m³}} = 62.4 \text{lb/ft³} \]
+                \[ \mu = 1 \text{ cP} \times \frac{\text{lb/ft/s}}{1488.16 \text{ cP}} = 0.00067 \text{lb/ft/s} \]
+                \[ Re = \frac{3.45 \text{ ft/s} \times 0.114 \text{ ft}\ \times 62.4 \text{lb/ft³}} {0.00067 \text{lb/ft/s}} \]
+                \[ Re = \text{36,589} \]
+                Determine flow regime:
+                \[ \text{Flow Regime = 36,589 > 4,000 = Turbulent} \]
+      
+              </P>
+          </div>
+          </div>
+        </div>
+
+        <!-- Applications Box -->
+        <div class="box white" id="applicationDescription">
+          <div class="card-body-2">
+          <button class="accordion-header">Applications</button>
+          <div class="accordian">
+          <p>Since the Reynolds number determines the charateristics of fluid flow, it is typically used as a precursory calculation in many fluid dynamic and heat transfer calcuations. </p>
+          <h3>Fluid Mixing</h3>
+          <p>If the goal for an application is to acchieve high mixing, ensure the reynolds number is in the turbulent regime. Turbulent flow helps pipe cleaning during Clean-In-Place (CIP) of sanitary equipment.</p>
+    
+          <h3>Heat Transfer</h3>
+          <p>Turbulent flow will transfer heat more effiecntly than laminar flow. Heat exchangers aim for turbulent flow within the tubes and shell. </p> 
+        </div>
+        </div>
+      </div>
+      <br>
+    </div>
+    </div>
+  </div>
+</div>
+
+  <script src="scripts/index.js"></script>
+  <script src="scripts/unitConversions.js"></script>
+  <script src="scripts/Reynolds.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

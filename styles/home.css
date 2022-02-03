@@ -1,0 +1,66 @@
+/* ==========================================================================
+   HOME SCREEN
+   ========================================================================== */
+
+.background-container {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 325px;
+  top: 0;
+  left: 0;
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  background-position: top center;
+  background-size: cover;
+  background-blend-mode: color-burn;
+}
+
+.triangle-container {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 50px;
+  top: 275px;
+  left: 0;
+}
+
+.triangle {
+  width: 100%;
+  height: 100%;
+}
+
+.home-header {
+  height: 250px;
+  position: relative;
+  /* margin-top: -128px; */
+  margin-bottom: 60px;
+}
+
+.card-section {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.home {
+  background: transparent;
+  box-shadow: none;
+}
+
+.homebtn {
+  color: white;
+}
+
+/* @media screen and (max-width: 610px) {
+  .background-container {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
+    background-position: top center;
+    background-size: cover;
+    background-blend-mode: color-burn;
+  }
+} */

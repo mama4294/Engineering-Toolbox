@@ -1,0 +1,348 @@
+<!-- Matthew Malone -->
+<!-- Last Updated 2/18/2021 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbox</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-11C4CME50R"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-11C4CME50R');
+   </script>
+   
+</head>
+<body>
+
+  <!--Navigation bar-->
+  <div id="nav-placeholder"></div>
+  <script>
+    $(document).ready(function(){   
+          $(function(){
+        $("#nav-placeholder").load("common/nav.html");
+      });
+     });
+  </script>
+
+ 
+<!-- Calc Box -->
+  <div class="grid-section grid">
+    <div class="code-area">
+
+      <div class="box">
+        <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+          <div class="card-body">
+            <h2 class="title"> Pipe Flow Calculator</h2>
+
+<!-- Solve Selection -->
+              <div class="row row-space">
+              <div class="input-group">
+                <label class="label">Solve For</label>
+                <div class="p-t-10">
+                    <label class="radio-container m-r-45">Velocity
+                        <input type="radio" checked="checked" id="input_sel_vel" name="input_sel"onclick=" toggleInputVel();">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">Flow Rate
+                        <input type="radio" id="input_sel_flow" name="input_sel" onclick="toggleInputFlow();">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">Diameter
+                      <input type="radio" id="input_sel_diameter" name="input_sel" onclick="toggleInputDia();">
+                      <span class="checkmark"></span>
+                  </label>
+                </div>
+            </div>
+          </div>
+
+  <!-- Inputs -->
+
+  <div class="row row-space hidden" id="input-block-vel">
+    <div class="col-2">
+        <div class="input-group">
+            <label class="label">Fluid Velocity</label>
+            <input class="input--style-4" type="number" value=5 step="1" name="velocity" id="input_vel">
+        </div>
+    </div>
+    <div class="col-2">
+      <div class="input-group">
+        <label class="label transparent">Unit</label>
+            <select class="input-style-1" name="unit" id="unit_vel">
+                <option>ft/s</option>
+                <option>m/s</option>
+            </select>
+            <div class="select-dropdown"></div>
+    </div>
+    </div>
+  </div>
+
+
+          <div class="row row-space" id="input-block-flow">
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">Flow Rate</label>
+                    <input class="input--style-4" type="number" value=60 step="1" name="flow_rate" id="input_flow">
+                </div>
+            </div>
+            <div class="col-2">
+              <div class="input-group">
+                <label class="label transparent">Unit</label>
+                    <select class="input-style-1" name="unit" id="unit_flow">
+                        <option>lpm</option>
+                        <option>gpm</option>
+                    </select>
+                    <div class="select-dropdown"></div>
+            </div>
+            </div>
+        </div>
+
+        <div class="row row-space" id="input-block-diameter">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Outer Diameter</label>
+                  <input class="input--style-4" type="number" value=1.5 step="0.5" name="flow_rate" id="input_diameter">
+              </div>
+          </div>
+
+          <div class="col-2">
+            <div class="input-group">
+              <label class="label transparent">Unit</label>
+                  <select class="input-style-1" name="unit" id="unit_diameter">
+                      <option>in</option>
+                      <option>cm</option>
+                  </select>
+                  <div class="select-dropdown"></div>
+          </div>
+          </div>
+      </div>
+
+
+      <div class="row row-space" id="input-block-thickness">
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label">Pipe Thickness</label>
+                <input class="input--style-4" type="number" value=0.065 step="0.001" name="flow_rate" id="input_thickness">
+            </div>
+        </div>
+        
+        <div class="col-2">
+          <div class="input-group">
+            <label class="label transparent">Unit</label>
+                <select class="input-style-1" name="unit" id="unit_thickness">
+                    <option>in</option>
+                    <option>cm</option>
+                </select>
+                <div class="select-dropdown"></div>
+        </div>
+        </div>
+    </div>
+<!-- Calc Button -->
+                <div class="button-row">
+                    <button class="btn btn--radius-2 btn--blue" onclick="solvePipeFlow()">Calculate</button>
+                </div>
+<!-- Not used. (Previously for answers) -->
+                <div class="row row-space hidden" >
+                  <div class="col-2">
+                      <div class="input-group">
+                          <label class="label">Velocity</label>
+                          <label class="label--style-4" >5.0</label>
+                      </div>
+                  </div>
+                  
+                  <div class="col-2">
+                    <div class="input-group">
+                      <label class="label transparent">Unit</label>
+                          <select class="input-style-1" name="unit">
+                              <option>ft/s</option>
+                              <option>m/s</option>
+                          </select>
+                          <div class="select-dropdown"></div>
+                  </div>
+                  </div>
+              </div>
+
+ <!-- Error Text -->
+ <div class="row row-space hidden" id="error-text-box">
+  <P id="error-text">Error</P>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Answer Block -->
+<div class="wrapper wrapper--w680 box hidden" id="answer-block">
+  <div class="card card-4">
+    <div class="card-body">
+      <h2 class="title"> Answer</h2>
+
+        <div class="row row-space hidden" id="answer-block-vel">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Velocity</label>
+                  <label class="label--style-4" id="answer-vel">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                  <select class="input-style-1" name="unit" id="unit_answer_vel" onfocus="getAnswerVelUnit()" onchange="changeAnswerVelUnits()">
+                  <option>ft/s</option>
+                  <option>m/s</option>
+                </select>
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+        <div class="row row-space hidden" id="answer-block-flow">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Fluid Flow Rate</label>
+                  <label class="label--style-4" id="answer-flow">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                  <select class="input-style-1" name="unit" id="unit_answer_flow" onfocus="getAnswerFlowUnit()" onchange="changeAnswerFlowUnits()">
+                  <option>lpm</option>
+                  <option>gpm</option>
+                </select>
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+        <div class="row row-space hidden" id="answer-block-dia">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Outer Diameter</label>
+                  <label class="label--style-4" id="answer-dia">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                  <select class="input-style-1" name="unit" id="unit_answer_dia" onfocus="getAnswerDiaUnit()" onchange="changeAnswerDiaUnits()">
+                  <option>in</option>
+                  <option>cm</option>
+                </select>
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+
+    </div>
+
+  </div>
+</div>
+
+  </div>
+  
+
+      <!-- Governing Equation Box -->
+        <div class="box white" id="equationDescription">
+          <div class="card-body-2">
+            <button class="accordion-header">Governing Equations</button>
+            <div class="accordian">
+          <P>This calculator finds the velocity of fluid in a pipe. This is useful for more advanced calculations like determining the Reynolds number and pressure drop through a system. The governing equation is a function of flow rate and pipe geometery</P>
+              <p>
+                  \[v =  Q / A\]
+              </p>
+          <p>The following equations are used to find the pipe geometery </p>
+          <p>
+              \[d_i = d_o - 2* x_w\]
+             </p>
+             <p>
+              \[r_i =  d_i/2\]
+             </p>
+              <p>
+              \[A =  \pi * r_i^2\]
+              </p>
+          
+          <h3>Definitions</h3>
+          <P>
+            \(v\) = Fluid Velocity
+            <br>
+              Q = Fluid Flow Rate
+              <br>
+              \(d_o\) = Pipe Outer Diameter
+              <br>
+              \(d_i\) = Pipe Inner Diameter
+              <br>
+              \(x_w\) = Pipe wall thickness
+              <br>
+              \(r_i\) = Pipe Inner Radius
+              <br>
+              \(A\) = Pipe Inner Cross-sectional Area
+ 
+          </P>
+
+
+        </div>
+        </div>
+      </div>
+       <!-- Example Box -->
+       <div class="box white" id="applicationDescription">
+        <div class="card-body-2">
+        <button class="accordion-header">Example</button>
+        <div class="accordian">
+          <p>Find the fluid velocity for water in a 1.5" OD tube (0.065" wall thickness) flowing at 60lpm.</p>
+          <P>
+            <P>Calculate inner pipe diameter:
+            \[ d_i = d_o - 2 \times x_w\] 
+            \[ d_i = 1.5" - 2\times0.065" = 1.37\text{ in}\] 
+            \[ d_i = 1.37\text{ in} \times  \frac{1\text{ ft}}{12\text{ in} } = 0.114 \text{ ft}\] 
+            Calculate inner pipe area:
+            \[A_i =  \pi \times r_i^2 = \pi \times \left(\frac{d_i}{2}\right)^2 \]
+            \[A_i = \pi \times \left(\frac{0.114\text{ ft}}{2}\right)^2 =0.01\text{ ft²} \]
+            Calculate fluid velocity:
+            \[v =  \frac{Q}{A_i}\]
+            \[v = \frac{60 \frac{L}{min} \times \frac{1 \text{ft³}}{28.3 \text{L}} \times \frac{60 sec}{min} }{0.01\text{ ft²}} = 3.45 \text{ ft/s}\]
+  
+          </P>
+      </div>
+      </div>
+    </div>
+        <!-- Applications Box -->
+        <div class="box white" id="applicationDescription">
+          <div class="card-body-2">
+          <button class="accordion-header">Applications</button>
+          <div class="accordian">
+          <h3>Pipe Sizing</h3>
+          <p>How do you determine the optimal pipe diameter for an job? If the pipe is undersized, a larger more-expensive pump is required to handle the large pressure drop. If the pipe is oversized, money was wasted on a larger diameter pipe and if it is a sanitary appliaction, the pipe is harder to clean. A general rule of thumb for liquids is to use a pipe diameter which results in a fluid velocity from 5-8 fps. </p>
+          <P>The calculator can solve for pipe geometery. Input the process flow rate and desired velocity to find an optimal pipe size for your applicaton.</P>
+          <h3>Cleaning Flow Rate</h3>
+          <P>Many food and beverage facilites to Clean-In-Place (CIP) systems to clean runs of pipe. Typically pipes are cleaned at velocites greater than 5 fps. </P>
+          <P>This calculator can find the mininum flow rate required to hit a cleaning velocity based on the largest pipe diamter of the run.</P>   
+        </div>
+        </div>
+      </div>
+      <br>
+    </div>
+    </div>
+  </div>
+</div>
+
+  <script src="scripts/index.js"></script>
+  <script src="scripts/unitConversions.js"></script>
+  <script src="scripts/fluidflow.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

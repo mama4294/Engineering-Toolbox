@@ -1,0 +1,233 @@
+<!-- Matthew Malone -->
+<!-- Last Updated 2/18/2021 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbox</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-11C4CME50R"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-11C4CME50R');
+   </script>
+   
+</head>
+<body>
+
+  <!--Navigation bar-->
+  <div id="nav-placeholder"></div>
+  <script>
+    $(document).ready(function(){   
+          $(function(){
+        $("#nav-placeholder").load("common/nav.html");
+      });
+     });
+  </script>
+
+ 
+<!-- Calc Box -->
+  <div class="grid-section grid">
+    <div class="code-area">
+
+      <div class="box">
+        <div class="wrapper wrapper--w680">
+          <div class="card card-4">
+            <div class="card-body">
+              <h2 class="title">Agitator Tip Speed</h2>
+
+
+            <!-- Solve Selection -->
+            <div class="row row-space">
+              <div class="input-group">
+                <label class="label">Calculate</label>
+                <div class="p-t-10">
+                    <label class="radio-container m-r-45">Tip Speed
+                        <input type="radio" checked="checked" id="input_sel_vel" name="input_sel" onclick="toggleInput1()">
+                        <span class="checkmark"></span>
+                    </label>                  
+                    <label class="radio-container">RPM
+                      <input type="radio" id="input_sel_flow" name="input_sel" onclick="toggleInput2()">
+                      <span class="checkmark"></span>
+                  </label>
+                </div>
+            </div>
+            </div>
+
+
+            <!-- Inputs -->
+
+
+              <div class="row row-space" id="input-diameter">
+                <div class="col-2">
+                    <div class="input-group">
+                        <label class="label">Impeller Diameter</label>
+                        <input class="input--style-4" type="number" value=3 step="1" name="flow_rate" id="input_diameter" onchange="resetAnswerBlock()">
+                    </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-group">
+                    <label class="label transparent">Unit</label>
+                        <select class="input-style-1" name="unit" id="unit_diameter">
+                            <option>in</option>
+                            <option>ft</option>
+                            <option>cm</option>
+                            <option>m</option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                </div>
+                </div>
+            </div>
+
+            <div class="row row-space" id="input-rpm">
+              <label class="label">Rotations per Minute</label>
+              <div class="col-2">
+                  <div class="input-group">
+                      <input class="input--style-4" type="number" value=300 step="1" name="flow_rate" id="input_rpm" onchange="resetAnswerBlock()">
+                  </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                      <select class="input-style-1" name="unit" id="unit_rpm">
+                        <option>rpm</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+              </div>
+              </div>
+          </div>
+
+          <div class="row row-space hidden" id="input-tipspeed">
+            <label class="label">Tip Speed</label>
+            <div class="col-2">
+                <div class="input-group">
+                    <input class="input--style-4" type="number" value=1.5 step="1" name="flow_rate" id="input_tipspeed" onchange="">
+                </div>
+            </div>
+            <div class="col-2">
+              <div class="input-group">
+                    <select class="input-style-1" name="unit" id="unit_tipspeed">
+                      <option>m/s</option>
+                      <option>ft/s</option>
+                    </select>
+                    <div class="select-dropdown"></div>
+            </div>
+            </div>
+        </div>
+
+
+
+       
+
+<!-- Calc Button -->
+                <div class="button-row">
+                    <button class="btn btn--radius-2 btn--blue" onclick="solveCylinder()">Calculate</button>
+                </div>
+
+ <!-- Error Text -->
+            <div class="row row-space hidden" id="error-text-box">
+                <P id="error-text">Error</P>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Answer Block -->
+
+
+  <div class="wrapper wrapper--w680 box hidden" id="answer-block">
+  <div class="card card-4">
+    <div class="card-body">
+      <h2 class="title"> Answer</h2>
+
+
+      <div class="row row-space hidden" id="answer-block-tipspeed">
+        <label class="label">Tip Speed</label>
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label--style-4" id="answer-tipspeed">5.0</label>
+            </div>
+        </div>
+           <div class="col-2">
+              <select class="input-style-1" name="unit" id="unit-answer-tipspeed" onchange="changeAnswerUnits()">   
+                <option>m/s</option>
+                <option>ft/s</option>
+            </select>
+             </div>
+      </div>
+
+      <div class="row row-space hidden" id="answer-block-rpm">
+        <label class="label">Rotations per Minute</label>
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label--style-4" id="answer-rpm">5.0</label>
+            </div>
+        </div>
+           <div class="col-2">
+              <select class="input-style-1" name="unit" id="unit-rpm">   
+                <option>rpm</option>
+            </select>
+             </div>
+      </div>
+
+      
+
+    </div>
+
+  </div>
+</div>
+
+
+      <!-- Governing Equation Box -->
+        <div class="box white" id="equationDescription">
+          <div class="card-body-2">
+            <button class="accordion-header">Governing Equations</button>
+            <div class="accordian">
+
+              <p>
+                Tip Speed:
+                \[V_{ts} = \pi*d*rpm\]
+                RPM:
+                \[rpm = \frac{V_{ts}}{\pi*d}\]
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Example Box -->
+      <div class="box white" id="applicationDescription">
+        <div class="card-body-2">
+        <button class="accordion-header">Example</button>
+        <div class="accordian">
+          <p>What is the tip speed of an agitator with a 3" diameter rushton impeller spinning at 300 rpm? 
+            \[V_{ts} = \pi*d*rpm\]
+            \[V_{ts} = 3.14*3\text{ inch}*\left(\frac{\text{m}}{39.37 \text{ inch}} \right)*300 \text{ rpm}* \left(\frac{\text{ min}}{60\text{ s}}  \right)\]
+            \[V_{ts} =  1.19 \text{m/s}\]
+          </P>
+      </div>
+      </div>
+    </div>
+
+      <br>
+    </div>
+    </div>
+  </div>
+</div>
+
+  <script src="scripts/index.js"></script>
+  <script src="scripts/unitConversions.js"></script>
+  <script src="scripts/tipSpeed.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!-- Matthew Malone -->
+<!-- Last Updated 2/18/2021 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbox</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-11C4CME50R"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-11C4CME50R');
+   </script>
+   
+</head>
+<body>
+
+  <!--Navigation bar-->
+  <div id="nav-placeholder"></div>
+  <script>
+    $(document).ready(function(){   
+          $(function(){
+        $("#nav-placeholder").load("common/nav.html");
+      });
+     });
+  </script>
+
+ 
+<!-- Calc Box -->
+  <div class="grid-section grid">
+    <div class="code-area">
+
+      <div class="box">
+        <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+          <div class="card-body">
+            <h2 class="title"> Linear Interpolation Calculator</h2>
+
+  
+
+          <!-- Inputs -->
+
+          <fieldset>
+            <legend>Point 1</legend>
+
+          <div class="row row-space" id="input-block-flow">
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">\(X_1\)</label>
+                    <input class="input--style-4" type="number" value=0 step="1" name="flow_rate" id="input_x1" onchange="resetAnswerBlock()">
+                </div>
+            </div>
+            <div class="col-2">
+              <div class="input-group">
+                  <label class="label">\(Y_1\)</label>
+                  <input class="input--style-4" type="number" value=50 step="1" name="flow_rate" id="input_y1" onchange="resetAnswerBlock()">
+              </div>
+          </div>
+        </div>
+
+      </fieldset>
+      <fieldset>
+        <legend>Point 2</legend>
+
+        <div class="row row-space" id="input-block-flow">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">\(X_2\)</label>
+                  <input class="input--style-4" type="number" value=1 step="1" name="flow_rate" id="input_x2" onchange="resetAnswerBlock()">
+              </div>
+          </div>
+          <div class="col-2">
+            <div class="input-group">
+                <label class="label">\(Y_2\)</label>
+                <input class="input--style-4" type="number" value=60 step="1" name="flow_rate" id="input_y2" onchange="resetAnswerBlock()">
+            </div>
+        </div>
+      </div>
+    </fieldset>
+
+   
+<div class="solve-sel-container">
+            <!-- Solve Selection -->
+            <div class="row row-space">
+              <div class="input-group">
+                <label class="label">Solve For</label>
+                <div class="p-t-10">
+                    <label class="radio-container m-r-45">Y
+                        <input type="radio" checked="checked" id="input_sel_vel" name="input_sel"onclick=" toggleInputX();">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">X
+                        <input type="radio" id="input_sel_flow" name="input_sel" onclick="toggleInputY();">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+            </div>
+</div>
+            <fieldset>
+              <legend>Point 3</legend>
+
+      <div class="row row-space" id="answer-row">
+        <div class="col-2" id="block-x">
+            <div class="input-group">
+                <label class="label" >Input \(X\)</label >
+                <input class="input--style-4" type="number" value=0.5 step="1" name="flow_rate" id="input_x" onchange="resetAnswerBlock()">
+            </div>
+        </div>
+        <div class="col-2 hidden" id="block-y">
+          <div class="input-group">
+              <label class="label">Input \(Y\)</label >
+              <input class="input--style-4" type="number" value=55 step="1" name="flow_rate" id="input_y" onchange="resetAnswerBlock()">
+          </div>
+      </div>
+        <div class="col-2 hidden" id="answer-block-x">
+          <div class="input-group">
+              <label class="label" id="label-y">Interpolated \(X\)</label>
+              <label class="label--style-3" id="answer_x"></label>
+          </div>
+      </div>
+        <div class="col-2 hidden" id="answer-block-y">
+          <div class="input-group">
+              <label class="label" id="label-y">Interpolated \(Y\)</label>
+              <label class="label--style-3" id="answer_y"></label>
+          </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="graph-container hidden" id="graph">
+    <canvas id="myChart"></canvas>
+  </div>
+
+<!-- Calc Button -->
+                <div class="button-row">
+                    <button class="btn btn--radius-2 btn--blue" onclick="solveLinearInterp()">Calculate</button>
+                </div>
+
+ <!-- Error Text -->
+ <div class="row row-space hidden" id="error-text-box">
+    <P id="error-text">Error</P>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+      <!-- Governing Equation Box -->
+        <div class="box white" id="equationDescription">
+          <div class="card-body-2">
+            <button class="accordion-header">Governing Equations</button>
+            <div class="accordian">
+          <P>Linear interpolation is a method of fitting a line so new points can be predicted. </P>
+          <br>
+
+          <div class="img-container">
+            <img src="images/linearInterp.png" alt="Moody Diagram" class="img-small">
+          </div>
+
+          <br>
+          <P>If two coordinates are known, a slope can be calculated 
+          \[ \text{Slope} = \frac{Y_2 - Y_1}{X_2 - X_1} \]
+            Assuming the function is linear, adding another coordinate will have the same slope. 
+            \[ \text{Slope} = \frac{Y_2 - Y_1}{X_2 - X_1} = \frac{Y - Y_1}{X - X_1} \]
+            Now just knowing an X value and a slope, we can calculate the corresponding Y value. 
+            \[ \left( Y - Y_1 \right) = \frac{Y_2 - Y_1}{X_2 - X_1} * \left( X - X_1 \right)\]
+            \[ Y  = \frac{Y_2 - Y_1}{X_2 - X_1} * \left( X - X_1 \right) + Y_1\]
+          </P>
+
+        </div>
+        </div>
+      </div>
+
+          <!-- Example Box -->
+          <div class="box white" id="applicationDescription">
+            <div class="card-body-2">
+            <button class="accordion-header">Example</button>
+            <div class="accordian">
+              <p>A presure transmitter at the bottom of the tank indirectly measures the tank level. The pressure reading is linearly proportional to tank level. If it reads 0.22 psi when there is 0.5' of level and 3.46 psi when there is 8' of level, what will it read when the level is 5'?
+              \[ \text{Point 1} = \left( X_1, Y_1 \right) = \left( 0.5 \text{'}, 0.22 \text{ psi}  \right)\]
+              \[ \text{Point 2} = \left( X_2, Y_2 \right) = \left( 8 \text{'}, 3.46 \text{ psi}  \right)\]
+              \[ \text{Target X} = 5\text{'} \]
+              Solve linear interpolation equation for Y:
+              \[ Y  = \frac{Y_2 - Y_1}{X_2 - X_1} * \left( X - X_1 \right) + Y_1\]
+              \[ Y  = \frac{3.46 - 0.22}{8 - 0.5} * \left( 5 - 0.22 \right) + 0.22\]
+              \[ Y  =  2.16 \text{ psi}\]
+              </P>
+          </div>
+          </div>
+        </div>
+        <br>
+
+    </div>
+    </div>
+  </div>
+</div>
+
+  <script src="scripts/index.js"></script>
+  <script src="scripts/unitConversions.js"></script>
+  <script src="scripts/general.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+</body>
+</html>

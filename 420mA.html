@@ -1,0 +1,392 @@
+<!-- Matthew Malone -->
+<!-- Last Updated 2/18/2021 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbox</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-11C4CME50R"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-11C4CME50R');
+   </script>
+   
+</head>
+<body>
+
+  <!--Navigation bar-->
+  <div id="nav-placeholder"></div>
+  <script>
+    $(document).ready(function(){   
+          $(function(){
+        $("#nav-placeholder").load("common/nav.html");
+      });
+     });
+  </script>
+
+ 
+<!-- Calc Box -->
+  <div class="grid-section grid">
+    <div class="code-area">
+
+      <div class="box">
+        <div class="wrapper wrapper--w680">
+          <div class="card card-4">
+            <div class="card-body">
+              <h2 class="title"> 4-20 mA Calculator</h2>
+
+
+
+            <!-- Solve Selection -->
+            <div class="row row-space">
+              <div class="input-group">
+                <label class="label">Known Parameter</label>
+                <div class="p-t-10">
+                    <label class="radio-container m-r-45">Percent
+                        <input type="radio" checked="checked" id="input_sel_vel" name="input_sel"onclick=" toggleInputCurrent();">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">Current
+                        <input type="radio" id="input_sel_flow" name="input_sel" onclick="toggleInputPercent();">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">Process Value
+                      <input type="radio" id="input_sel_flow" name="input_sel" onclick="toggleInputPV();">
+                      <span class="checkmark"></span>
+                  </label>
+                </div>
+            </div>
+            </div>
+
+
+
+
+            <!-- Inputs -->
+
+            <div class="row row-space hidden" id="input-block-current">
+              <div class="col-2">
+                  <div class="input-group">
+                      <label class="label">Input Current</label>
+                      <input class="input--style-4" type="number" value=5 step="1" name="velocity" id="input_current" onchange="resetAnswerBlock420()">
+                  </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label transparent">Unit</label>
+                      <select class="input-style-1" name="unit" id="unit_current">
+                          <option>mA</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+              </div>
+              </div>
+            </div>
+
+            <div class="row row-space" id="input-block-percent">
+              <div class="col-2">
+                  <div class="input-group">
+                      <label class="label">Input Percent</label>
+                      <input class="input--style-4" type="number" value=25 step="1" name="velocity" id="input_percent" onchange="resetAnswerBlock420()">
+                  </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label transparent">Unit</label>
+                      <select class="input-style-1" name="unit" id="unit_percent">
+                          <option>%</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+              </div>
+              </div>
+            </div>
+
+
+            <div class="row row-space hidden" id="input-block-PV">
+              <div class="col-2">
+                  <div class="input-group">
+                      <label class="label">Process Value</label>
+                      <input class="input--style-4" type="number" value=75 step="1" name="velocity" id="input_PV" onchange="resetAnswerBlock420()">
+                  </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label transparent">Unit</label>
+                      <select class="input-style-1" name="unit" id="unit_transmitter_PV" onchange="setTransmitterUnitPV()">
+                          <option>°C</option>  
+                          <option>°F</option>
+                          <option>%</option>
+                          <option>psi</option>
+                          <option>bar</option>
+                          <option>atm</option>
+                          <option>mbar</option>
+                          <option>inH2O</option>
+                          <option>lpm</option>
+                          <option>gpm</option>
+                          <option>lb/hr</option>
+                          <option>kg/hr</option>
+                          <option>scfm</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+              </div>
+              </div>
+            </div>
+
+
+              <!-- Transmitter Selection -->
+              <div class="row row-space" id="transmitter-container">
+                <div class="input-group">
+                  <label class="label">Options</label>
+                  <div class="p-t-10">
+                      <label class="radio-container m-r-45">Standard
+                          <input type="radio" checked="checked" id="input_sel_vel" name="input_trans" onclick="hideTransmitter()">
+                          <span class="checkmark"></span>
+                      </label>
+                      <label class="radio-container">Include Transmitter
+                          <input type="radio" id="input_transmitter" name="input_trans" onclick="showTransmitter()">
+                          <span class="checkmark"></span>
+                      </label>
+                  </div>
+              </div>
+              </div>
+
+
+
+              <!-- Transmitter Data -->
+
+              <div class="row row-space hidden" id="input-block-LRL">
+                <div class="col-2">
+                    <div class="input-group">
+                        <label class="label">Lower Range</label>
+                        <input class="input--style-4" type="number" value=0 step="1" name="velocity" id="input_transmitter_LRL" onchange="resetAnswerBlock420()">
+                    </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-group">
+                    <label class="label transparent">Unit</label>
+                        <select class="input-style-1" name="unit" id="unit_transmitter_LRL" onchange="setTransmitterUnitLRL()">
+                            <option>°C</option>  
+                            <option>°F</option>
+                            <option>%</option>
+                            <option>psi</option>
+                            <option>bar</option>
+                            <option>atm</option>
+                            <option>mbar</option>
+                            <option>inH2O</option>
+                            <option>lpm</option>
+                            <option>gpm</option>
+                            <option>lb/hr</option>
+                            <option>kg/hr</option>
+                            <option>scfm</option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                </div>
+                </div>
+              </div>
+
+              <div class="row row-space hidden" id="input-block-URL">
+                <div class="col-2">
+                    <div class="input-group">
+                        <label class="label">Upper Range</label>
+                        <input class="input--style-4" type="number" value=100 step="1" name="velocity" id="input_transmitter_URL" onchange="resetAnswerBlock420()">
+                    </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-group">
+                    <label class="label transparent">Unit</label>
+                        <select class="input-style-1" name="unit" id="unit_transmitter_URL" onchange="setTransmitterUnitURL()">
+                          <option>°C</option>  
+                          <option>°F</option>
+                          <option>%</option>
+                          <option>psi</option>
+                          <option>bar</option>
+                          <option>atm</option>
+                          <option>mbar</option>
+                          <option>inH2O</option>
+                          <option>lpm</option>
+                          <option>gpm</option>
+                          <option>lb/hr</option>
+                          <option>kg/hr</option>
+                          <option>scfm</option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                </div>
+                </div>
+              </div>
+
+<!-- Calc Button -->
+                <div class="button-row">
+                    <button class="btn btn--radius-2 btn--blue" onclick="solveMA()">Calculate</button>
+                </div>
+
+ <!-- Error Text -->
+            <div class="row row-space hidden" id="error-text-box">
+                <P id="error-text">Error</P>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Answer Block -->
+
+
+  <div class="wrapper wrapper--w680 box hidden" id="answer-block">
+  <div class="card card-4">
+    <div class="card-body">
+      <h2 class="title"> Answer</h2>
+
+
+        <div class="row row-space hidden" id="answer-block-percent">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Percent</label>
+                  <label class="label--style-4" id="answer-percent">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <label class="label--style-4">%</label>
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+        <div class="row row-space hidden" id="answer-block-current">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Current</label>
+                  <label class="label--style-4" id="answer-current">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <label class="label--style-4 standard-case">mA</label>
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+        <div class="row row-space hidden" id="answer-block-PV">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Process Value</label>
+                  <label class="label--style-4" id="answer-PV">0.5</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <label class="label--style-4 standard-case" id="unit-PV">Unitless</label>
+
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+      <!-- Governing Equation Box -->
+        <div class="box white" id="equationDescription">
+          <div class="card-body-2">
+            <button class="accordion-header">Governing Equations</button>
+            <div class="accordian">
+          <P>Current loops are used to transmit a 0-100% signal over two wires. Control systems use them to recieve information from transmitters (ie. signal from a pressure sensor) or to send information to control valves (ie. a command to open 75%). 
+
+          </P>
+        <br>
+        <p>
+          Current is used as a signal becuase it is the same anyway along the wire. If volage was used as the signal, the signal would be higher at the beginning of the wire but lower 100ft away. 
+        </p>
+          <br>
+
+          <p>The typical current loop is 4-20 mA. This means that 4 miliamps equals 0% and 20 miliamps equals 100%. Why would one use 4-20 instead of 0-20? It is because if a wire came loose, the circult would be broken and the system would see 0mA. By setting the lower limit to 4mA, the control system is confident there are no broken wires. </p><br>
+
+          <table>
+            <thead>
+                <tr>
+                  <th class="table-header">%</th>
+                  <th class="table-header">mA</th> 
+                </tr>
+                <tr>
+                  <td>0%</td>
+                  <td>4 mA</td>
+                </tr>
+                <tr>
+                  <td>25%</td>
+                  <td>8 mA</td>
+                </tr>
+                <tr>
+                  <td>50%</td>
+                  <td>20 mA</td>
+                </tr>
+                <tr>
+                  <td>75%</td>
+                  <td>8 mA</td>
+                </tr>
+                <tr>
+                  <td>100%</td>
+                  <td>20 mA</td>
+                </tr>
+
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <br>
+        <p>
+          The current loop can be solved by using <a href="linearIntorpolation.html">linear interpolation</a> with 4mA, 0% as the first point and 20mA, 100% as the second point. If transmitter lower and upper ranges are known, replace the percentages with the range values to solve for a process value.
+        </p>
+
+          <br>
+
+        </div>
+        </div>
+      </div>
+
+          <!-- Example Box -->
+          <div class="box white" id="applicationDescription">
+            <div class="card-body-2">
+            <button class="accordion-header">Example</button>
+            <div class="accordian">
+              <p>A presure transmitter is sending 10.5mA to an analog input card in a control panel. The lower and upper range of the pressure transmitter is 0 psi and 100 psi respectively. What process value should the control system be reading?
+              \[ \text{Point 1} = \left( 4 \text{mA}, \text{LRL} \right) = \left( 4 \text{mA}, 0 \text{ psi}  \right) \]
+              \[ \text{Point 2} = \left( 20\text{mA} , \text{URL} \right) = \left( 20 \text{mA}, 100 \text{ psi}  \right)\]
+              \[ \text{Target X} = 10.5 \text{mA} \]
+              Solve linear interpolation equation for PV:
+              \[ PV  = \frac{\text{URL} - \text{LRL}}{\left(20 - 4\right) \text{mA}} * \left( 10.5 - 4 \right)\text{mA} + \text{LRL}\]
+              \[ PV  = \frac{100  - 0\text{ psi}}{16\text{mA}} * \left( 10.5 - 4 \right)\text{mA} + 0\text{ psi}\]
+              \[ PV  =  40.6 \text{ psi}\]
+              </P>
+          </div>
+          </div>
+        </div>
+        <br>
+
+    </div>
+    </div>
+  </div>
+</div>
+
+  <script src="scripts/index.js"></script>
+  <script src="scripts/unitConversions.js"></script>
+  <script src="scripts/general.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

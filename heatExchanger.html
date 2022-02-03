@@ -1,0 +1,656 @@
+<!-- Matthew Malone -->
+<!-- Last Updated 2/18/2021 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbox</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-11C4CME50R"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-11C4CME50R');
+   </script>
+   
+</head>
+<body>
+
+  <!--Navigation bar-->
+  <div id="nav-placeholder"></div>
+  <script>
+    $(document).ready(function(){   
+          $(function(){
+        $("#nav-placeholder").load("common/nav.html");
+      });
+     });
+  </script>
+
+ 
+<!-- Calc Box -->
+  <div class="grid-section grid">
+    <div class="code-area">
+
+      <div class="box">
+        <div class="wrapper wrapper--w680">
+          <div class="card card-4">
+            <div class="card-body">
+              <h2 class="title">Heat Exchanger Sizing</h2>
+
+
+
+            <!-- Solve Selection -->
+            <div class="row row-space">
+              <div class="input-group">
+                <label class="label">Solve For</label>
+                <div class="p-t-10">
+                    <label class="radio-container m-r-45">HXR Size, one fluid outlet temp
+                        <input type="radio" checked="checked" id="input_sel_vel" name="input_sel"onclick=" toggleInputTemp();">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">HXR Size, one fluid flow rate
+                        <input type="radio" id="input_sel_flow" name="input_sel" onclick="toggleInputFlow();">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">Both Discharge Temps
+                      <input type="radio" id="input_sel_flow" name="input_sel" onclick="toggleInputBothTemps();">
+                      <span class="checkmark"></span>
+                  </label>
+                </div>
+            </div>
+            </div>
+
+
+
+
+            <!-- Inputs -->
+
+            <fieldset>
+              <legend>Fluid A</legend>
+
+              <div class="row row-space" id="input-block-a-flow">
+                <div class="col-2">
+                    <div class="input-group">
+                        <label class="label">Flow Rate</label>
+                        <input class="input--style-4" type="number" value=60 step="1" name="flow_rate" id="input_a_flow" onchange="resetAnswerBlock()">
+                    </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-group">
+                    <label class="label transparent">Unit</label>
+                        <select class="input-style-1" name="unit" id="unit_a_flow">
+                            <option>lpm</option>
+                            <option>gpm</option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                </div>
+                </div>
+            </div>
+
+            <div class="row row-space" id="input-block-a-density">
+              <label class="label">Fluid Density</label>
+              <div class="col-2">
+                  <div class="input-group">
+                      <input class="input--style-4" type="number" value=1000 step="1" name="flow_rate" id="input_a_density" onchange="resetAnswerBlock()">
+                  </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                      <select class="input-style-1" name="unit" id="unit_a_density">
+                        <option>kg/m³</option>
+                        <option>kg/L</option>
+                        <option>g/cm³</option>
+                        <option>lb/ft³</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+              </div>
+              </div>
+          </div>
+
+
+            <div class="row row-space" id="input-block-a-temp-in">
+              <div class="col-2">
+                  <div class="input-group">
+                      <label class="label">Temperature In</label>
+                      <input class="input--style-4" type="number" value=121 step="1" name="flow_rate" id="input_a_temp_in" onchange="resetAnswerBlock()">
+                  </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label transparent">Unit</label>
+                      <select class="input-style-1" name="unit" id="unit_a_temp_in">
+                          <option>°C</option>
+                          <option>°F</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+              </div>
+              </div>
+          </div>
+
+
+          <div class="row row-space" id="input-block-a-temp-out">
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">Temperature Out</label>
+                    <input class="input--style-4" type="number" value=75 step="1" name="flow_rate" id="input_a_temp_out" onchange="resetAnswerBlock()">
+                </div>
+            </div>
+            <div class="col-2">
+              <div class="input-group">
+                <label class="label transparent">Unit</label>
+                    <select class="input-style-1" name="unit" id="unit_a_temp_out">
+                        <option>°C</option>
+                        <option>°F</option>
+                    </select>
+                    <div class="select-dropdown"></div>
+            </div>
+            </div>
+        </div>
+
+
+
+        <div class="row row-space" id="input-block-a-cp">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Heat Capacity</label>
+                  <input class="input--style-4" type="number" value=4.18 step="0.01" name="flow_rate" id="input_a_cp" onchange="resetAnswerBlock()">
+              </div>
+          </div>
+          <div class="col-2">
+            <div class="input-group">
+              <label class="label transparent">Unit</label>
+                  <select class="input-style-1" name="unit" id="unit_a_cp">
+                      <option>kJ/(kg°C)</option>
+                      <option>BTU/(lb°F)</option>
+                  </select>
+                  <div class="select-dropdown"></div>
+          </div>
+          </div>
+      </div>
+
+            </fieldset>
+
+            <fieldset>
+              <legend>Fluid B</legend>
+
+              <div class="row row-space" id="input-block-b-flow">
+                <div class="col-2">
+                    <div class="input-group">
+                        <label class="label">Flow Rate</label>
+                        <input class="input--style-4" type="number" value=80 step="1" name="flow_rate" id="input_b_flow" onchange="resetAnswerBlock()">
+                    </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-group">
+                    <label class="label transparent">Unit</label>
+                        <select class="input-style-1" name="unit" id="unit_b_flow">
+                            <option>lpm</option>
+                            <option>gpm</option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                </div>
+                </div>
+            </div>
+
+            <div class="row row-space" id="input-block-b-density">
+              <label class="label">Fluid Density</label>
+              <div class="col-2">
+                  <div class="input-group">
+                      <input class="input--style-4" type="number" value=1000 step="1" name="flow_rate" id="input_b_density" onchange="resetAnswerBlock()">
+                  </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                      <select class="input-style-1" name="unit" id="unit_b_density">
+                        <option>kg/m³</option>
+                        <option>kg/L</option>
+                        <option>g/cm³</option>
+                        <option>lb/ft³</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+              </div>
+              </div>
+          </div>
+
+
+            <div class="row row-space" id="input-block-b-temp-in">
+              <div class="col-2">
+                  <div class="input-group">
+                      <label class="label">Temperature In</label>
+                      <input class="input--style-4" type="number" value=35 step="1" name="flow_rate" id="input_b_temp_in" onchange="resetAnswerBlock()">
+                  </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label transparent">Unit</label>
+                      <select class="input-style-1" name="unit" id="unit_b_temp_in">
+                          <option>°C</option>
+                          <option>°F</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+              </div>
+              </div>
+          </div>
+
+
+          <div class="row row-space hidden" id="input-block-b-temp-out">
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">Temperature Out</label>
+                    <input class="input--style-4" type="number" value=70 step="1" name="flow_rate" id="input_b_temp_out" onchange="resetAnswerBlock()">
+                </div>
+            </div>
+            <div class="col-2">
+              <div class="input-group">
+                <label class="label transparent">Unit</label>
+                    <select class="input-style-1" name="unit" id="unit_b_temp_out">
+                        <option>°C</option>
+                        <option>°F</option>
+                    </select>
+                    <div class="select-dropdown"></div>
+            </div>
+            </div>
+        </div>
+
+
+
+        <div class="row row-space" id="input-block-b-cp">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Heat Capacity</label>
+                  <input class="input--style-4" type="number" value=4.18 step="0.01" name="flow_rate" id="input_b_cp" onchange="resetAnswerBlock()">
+              </div>
+          </div>
+          <div class="col-2">
+            <div class="input-group">
+              <label class="label transparent">Unit</label>
+                  <select class="input-style-1" name="unit" id="unit_b_cp">
+                      <option>kJ/(kg°C)</option>
+                      <option>BTU/(lb°F)</option>
+                  </select>
+                  <div class="select-dropdown"></div>
+          </div>
+          </div>
+      </div>
+
+            </fieldset>
+
+            <fieldset>
+              <legend>Heat Exchanger</legend>
+
+              <div class="row row-space hidden" id="input-block-hxr-area">
+                <div class="col-2">
+                    <div class="input-group">
+                        <label class="label">HXR Size</label>
+                        <input class="input--style-4" type="number" value=10.5 step="1" name="flow_rate" id="input_hxr_area" onchange="resetAnswerBlock()">
+                    </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-group">
+                    <label class="label transparent">Unit</label>
+                        <select class="input-style-1" name="unit" id="unit_hxr_area">
+                            <option>m²</option>
+                            <option>ft²</option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                </div>
+                </div>
+            </div>
+
+            <div class="row row-space" id="input-block-hxr-u">
+              <label class="label">Heat Transfer Coefficient</label>
+              <div class="col-2">
+                  <div class="input-group">
+                      <input class="input--style-4" type="number" value=400 step="1" name="flow_rate" id="input_hxr_u" onchange="resetAnswerBlock()">
+                  </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                      <select class="input-style-1" name="unit" id="unit_hxr_u">
+                          <option>W/(m²°C)</option>
+                          <option>Btu/(hr*ft²°F)</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+              </div>
+              </div>
+          </div>
+
+
+            </fieldset>
+
+       
+
+<!-- Calc Button -->
+                <div class="button-row">
+                    <button class="btn btn--radius-2 btn--blue" onclick="solveHXR()">Calculate</button>
+                </div>
+
+ <!-- Error Text -->
+            <div class="row row-space hidden" id="error-text-box">
+                <P id="error-text">Error</P>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Answer Block -->
+
+
+  <div class="wrapper wrapper--w680 box hidden" id="answer-block">
+  <div class="card card-4">
+    <div class="card-body">
+      <h2 class="title"> Answer</h2>
+
+
+      <div class="row row-space hidden" id="answer-block-temp-a">
+        <label class="label">Fluid A Discharge Temp</label>
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label--style-4" id="answer-tempA">5.0</label>
+            </div>
+        </div>
+           <div class="col-2">
+              <select class="input-style-1" name="unit" id="unit-tempA" onchange="changeAnswerTempAUnits()">
+                <option>°C</option>
+                <option>°F</option>
+            </select>
+             </div>
+      </div>
+
+        <div class="row row-space hidden" id="answer-block-temp-b">
+          <label class="label">Fluid B Discharge Temp</label>
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label--style-4" id="answer-tempB">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+                <select class="input-style-1" name="unit" id="unit-tempB" onchange="changeAnswerTempUnits()">
+                  <option>°C</option>
+                  <option>°F</option>
+              </select>
+               </div>
+        </div>
+
+        <div class="row row-space hidden" id="answer-block-flow-b">
+          <label class="label">Fluid B Flow Rate</label>
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label--style-4" id="answer-flowB">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+              <select class="input-style-1" name="unit" id="ans_b_flow" onchange="changeAnswerFlowUnits()">
+                <option>lpm</option>
+                <option>gpm</option>
+            </select>
+               </div>
+        </div>
+
+        <div class="row row-space hidden" id="answer-block-lmtd">
+          <label class="label">LMTD</label>
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label--style-4" id="answer-lmtd">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+              <select class="input-style-1" name="unit" id="unit-lmtd" onchange="changeAnswerLMTDUnits()">
+                <option>°C</option>
+                <option>°F</option>
+            </select>
+            </div>
+        </div>
+
+        <div class="row row-space hidden" id="answer-block-hxr-area">
+          <label class="label">Heat Exchanger Size</label>
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label--style-4" id="answer-area">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+              <select class="input-style-1" name="unit" id="unit_ans_area" onchange="changeAnswerAreaUnits()">
+                <option>m²</option>
+                <option>ft²</option>
+            </select>
+            </div>
+        </div>
+
+        
+
+        <div class="row row-space hidden" id="answer-block-PV">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Process Value</label>
+                  <label class="label--style-4" id="answer-PV">0.5</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <label class="label--style-4 standard-case" id="unit-PV">Unitless</label>
+
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+
+        <div class="graph-container" id="graph">
+          <canvas id="myChart"></canvas>
+        </div>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+      <!-- Governing Equation Box -->
+        <div class="box white" id="equationDescription">
+          <div class="card-body-2">
+            <button class="accordion-header">Governing Equations</button>
+            <div class="accordian">
+
+              <p>
+
+              If there is no energy loss to the environment, the heat transfered out of one fluid is equal to the heat transfered in to another fluid. 
+              \[Q = Q_{hot fluid out} = Q_{cold fluid in}\]
+              \[Q_{hot fluid out} = V_{hot} * \rho*{hot} * Cp_{hot} * \Delta T_{hot} \]
+              \[Q_{cold fluid in} = V_{cold} * \rho*{cold} * Cp_{cold} * \Delta T_{cold} \]
+              The equations can be rearranged to solve for one unknown. 
+
+              <br><br>
+              Heat exchangers can be arranged in two flow paths:
+            <ul>
+              <li><strong>-Counter Current Flow:</strong> The hot stream is flowing in the opposite direction as the cold stream.</li>
+              <li><strong>-Parrallel Flow:</strong> The hot stream and cold stream are flowing in the same direction.</li>
+            </ul>
+            <p>
+            This calculator uses the counter current flow path because it is most commonly used and more efficient. 
+              In order to size the heat exchanger, two methods can be used depending on which is more useful for the application. </p>
+            </p>
+
+              <h3>LMTD Method</h3>
+              <p>
+              The LMTD (Log Mean Temperature Difference) Method is useful for analyzing exisitng systems or when 3 of the four temperatures are known. 
+              \[Q = U * A * LMTD\]
+              This can be rearranged to solve for heat exchanger size (area):
+              \[A = \frac{Q}{U * LMTD} \]
+              The <a href="lmtd.html">log mean temperature difference</a> is a parameter which depends the exchanger inlet and outlet temperatures:  <i>Note: This is only applicable for a heat exchanger with counter current flow</i>
+              \[ \Delta_A = T_{hot in} - T_{cold out} \] 
+              \[ \Delta_B = T_{hot out} - T_{cold in} \] 
+              \[ LMDT = \frac{\Delta_A - \Delta_B}{\log{ \left( \Delta_A - \Delta_B  \right)}} \] 
+              Heat duty (Q) is defined as:  
+              \[Q = V * \rho * Cp * \Delta T \]
+              Overall Heat Transfer Coefficent (U) depends on a variety of factors including heat exchanger style and fluid properties. Common U values can be found online. 
+              <br><br>
+        
+            
+            </p>
+          
+              <h3>NTU Method</h3>
+              <p> The LMTD method is useful for determining the heat exchanger size or overall heat transfer coefficient when all temperatures are known, but it is difficult to predict discharge temperatures. 
+                If neither discharge temperature is known, the solution requires iteration. 
+                <br>
+                <br>
+                The NTU (Number of Transfer Units) Method is an alternative option for calculating discharge temperatures without iteration. The method calculates heat exchanger effectivness (e) to determine the actual heat transfer as a ratio of the maxinum possible heat transfer. 
+                \[e = \frac{Q}{Q_{max}} \]
+                The max heat duty is definted as:
+                \[Q_{max} = C_{min} * \left( T_{hot,in} - T_{cold,in} \right) \]
+                C min is the smaller of the two heat capacity rates:
+                \[C_a =  V_a * \rho_a * Cp_a \]
+                \[C_b =  V_b * \rho_b * Cp_b \]
+                \[C_{min} = mininum(C_a,C_b) \]
+                The effectivness of the heat exchanger can be found using NTU and the ratio of min and max heat capacity rates:
+                \[NTU = \frac{UA}{C_{min}} \]
+                \[Cr = C_{min}/C_{max} \]
+                In a single pass heat exchanger the effectivness is:
+                \[e = \frac{1-exp(-NTU*(C_r+1))}{1-C_r*exp(-NTU*(C_r+1))} \]
+                The actual heat duty can now be calculated using:
+                \[Q = e * C_{min} * \left( T_{hot,in} - T_{cold,in} \right) \]
+
+              </p>
+
+
+              <h3>Assumptions</h3>
+
+              <p>This calculator is only applicable for the following assumptions:
+                <ul>
+                  <li>-The flow path is counter current flow (most common) in the heat exchanger</li>
+                  <li>-The heat exchanger is at steady state</li>
+                  <li>-No heat is lost to the environment</li>
+                  <li>-No phase change in the heat exchanger</li>
+                  <li>-The fluids are incompressable liquids</li>
+                  <li>-Density and heat capacity are independant of temperature </li>
+                </ul>
+              </p>
+
+          </div>
+        </div>
+      </div>
+
+          <!-- Example Box -->
+          <div class="box white" id="applicationDescription">
+            <div class="card-body-2">
+            <button class="accordion-header">LMTD Example</button>
+            <div class="accordian">
+              <p>What is the size of the heat exchanger required to cool 60 lpm of sterilized juice from 121°C to 75°C using 80 lpm of cold water at 35°C? What temperature will the cooling water exit the heat exchanger at? 
+                <br><br>
+                Assume both streams have the following properties: density 1000 kg/m³, heat capacity 4.18 kJ/(kg°C)). U is 400 W/(m²°C).
+                <br><br>
+                Calculate heat duty:
+                \[Q_{hot} = V_{hot} * \rho_{hot} * Cp_{hot} * \Delta T_{hot} \]
+                \[V_{hot}= 60\text{lpm} * \frac{1 \text{ m³/s}}{60,000 \text{ lpm}} = 0.001 \text{ m³/s} \]
+                \[Q_{hot} = 0.001 \frac{m³}{s} * 1000 \frac{kg}{m³} * 4.18 \frac{kJ}{kg°C}  * (75-121\text{°C}) \]
+                \[Q_{hot} = -192.3 \text{kJ/s}\]
+                \[Q_{hot} = -192.3 \text{kW}\]
+                Determine the unknown discharge temp:
+                \[Q_{cold} = -Q_{hot}\]
+                \[Q_{cold} = V_{cold} * \rho_{cold} * Cp_{cold} * \Delta T_{cold} \]
+                \[\Delta T_{cold} = \frac{Q_{cold}}{V_{cold} * \rho_{cold} * Cp_{cold}} \]
+                \[T_{cold_out} = \frac{Q_{cold}}{V_{cold} * \rho_{cold} * Cp_{cold}}+T_{cold_in}\]
+                \[V_{cold}= 80\text{lpm} * \frac{1 \text{ m³/s}}{60,000 \text{ lpm}} = 0.0013 \text{ m³/s} \]
+                \[T_{cold_out} = \frac{192.3 \text{kJ/s}}{0.0013 \text{ m³/s} * 1000 \frac{kg}{m³} * 4.18 \frac{kJ}{kg°C}}+35\text{°C}\]
+                \[T_{cold_out} = 69.5\text{°C}\]
+                Calculate LMTD:
+                \[ \Delta_A = T_{hot in} - T_{cold out} = 121 - 69.5 =  51.5\text{°C} \] 
+                \[ \Delta_B = T_{hot out} - T_{cold in} = 75 - 35 = 40\text{°C} \] 
+                \[ LMDT = \frac{\Delta_A - \Delta_B}{\log{ \left( \Delta_A - \Delta_B  \right)}} \] 
+                \[ LMDT = \frac{51.1-40}{\log{ \left(51.1-40  \right)}} = 45.5\text{°C} \] 
+                Size heat exchanger:
+                \[Q = U * A * LMTD\]
+                \[A = \frac{U * LMTD}{Q} \]
+                \[A = \frac{400 \text{W/(m²°C)} * 45.5\text{°C}}{192.3 \text{kW} * \frac{1000\text{W}}{1\text{kW}}} \]
+                \[A = 10.5 \text{m²} \]
+              </P>
+          </div>
+          </div>
+        </div>
+
+
+        <!-- Example Box -->
+        <div class="box white" id="applicationDescription">
+          <div class="card-body-2">
+          <button class="accordion-header">NTU Example</button>
+          <div class="accordian">
+            <p>What are the outlet temperatures if 60 lpm of sterilized juice at 121°C exchanges heat with 80 lpm of cold water at 35°C in a heat exchanger with 10.5m² of surface area ? 
+              <br><br>
+              Assume both streams have the following properties: density 1000 kg/m³, heat capacity 4.18 kJ/(kg°C)). U is 400 W/(m²°C).
+              <br><br>
+              Calculate heat capacity rates for each fluid A:
+              \[C_a =  V_a * \rho_a * Cp_a \]
+              \[V_{a}= 60\text{lpm} * \frac{1 \text{ m³/s}}{60,000 \text{ lpm}} = 0.001 \text{ m³/s} \]
+              \[C_a =  0.001 \text{ m³/s}  * 1000 \frac{kg}{m³} * 4.18 \frac{kJ}{kg°C} \]
+              \[C_a =  4.18 \frac{kJ}{s°C}\]
+              \[C_a =  4.18 \frac{kW}{°C}\]
+              Calculate heat capacity rates for each fluid B:
+              \[C_b =  V_b * \rho_b * Cp_b \]
+              \[V_{b}= 80\text{lpm} * \frac{1 \text{ m³/s}}{60,000 \text{ lpm}} = 0.0013 \text{ m³/s} \]
+              \[C_b =  0.0013 \text{ m³/s}  * 1000 \frac{kg}{m³} * 4.18 \frac{kJ}{kg°C} \]
+              \[C_b =  5.43 \frac{kJ}{s°C}\]
+              \[C_b =  5.43 \frac{kW}{°C}\]
+              Determine the mininum and maxinum heat capacity rates:
+              \[C_{a} \le C_{a} \]
+              \[C_{min} =  C_{a} = 4.18 \frac{kW}{°C}\]
+              \[C_{max} =  C_{b} = 5.43 \frac{kW}{°C}\]
+              Calculate ratio of heat capacity rates:
+              \[C_{r} =  C_{min} / C_{max}\]
+              \[C_{r} =  4.18 / 5.43 = 0.77\]
+              Calculate number of transfer units:
+              \[NTU = \frac{UA}{C_{min}} \]
+              \[NTU = \frac{400 \frac{W}{m²°C} * 10.5 \text{m²}}{4.18 \frac{kW}{°C} * 1000 \frac{W}{kW}} \]
+              \[NTU = 1.0047 \]
+              Calculate heat exchanger efficiency:
+              \[e = \frac{1-exp(-NTU*(C_r+1))}{1-C_r*exp(-NTU*(C_r+1))} \]
+              \[e = \frac{1-exp(-1.0047*(0.77+1))}{1-0.77*exp(-1.0047*(0.77+1))} \]
+              \[e = 0.53 \]
+              Calculate heat duty:
+              \[Q = e * C_{min} * \left( T_{hot,in} - T_{cold,in} \right) \]
+              \[Q = 0.53 * 4.18 \frac{kW}{°C} * \left( 121\text{°C} - 35\text{°C} \right) \]
+              \[Q = 191.6 \text{kW} \]
+              Determine the cold fluid outlet temp:
+              \[Q_{cold} = Q\]
+              \[Q_{cold} = V_{cold} * \rho_{cold} * Cp_{cold} * \Delta T_{cold} \]
+              \[\Delta T_{cold} = \frac{Q_{cold}}{V_{cold} * \rho_{cold} * Cp_{cold}} \]
+              \[T_{cold_out} = \frac{Q_{cold}}{V_{cold} * \rho_{cold} * Cp_{cold}}+T_{cold_in}\]
+              \[V_{cold}= 80\text{lpm} * \frac{1 \text{ m³/s}}{60,000 \text{ lpm}} = 0.0013 \text{ m³/s} \]
+              \[T_{cold_out} = \frac{191.6 \text{kJ/s}}{0.0013 \text{ m³/s} * 1000 \frac{kg}{m³} * 4.18 \frac{kJ}{kg°C}}+35\text{°C}\]
+              \[T_{cold_out} = 69.5\text{°C}\]
+              Determine the hot fluid outlet temp:
+              \[Q_{hot} = -Q\]
+              \[Q_{hot} = V_{hot} * \rho_{hot} * Cp_{hot} * \Delta T_{hot} \]
+              \[\Delta T_{hot} = \frac{Q_{hot}}{V_{hot} * \rho_{hot} * Cp_{hot}} \]
+              \[T_{hot_out} = \frac{Q_{hot}}{V_{hot} * \rho_{hot} * Cp_{hot}}+T_{cold_in}\]
+              \[V_{hot}= 60\text{lpm} * \frac{1 \text{ m³/s}}{60,000 \text{ lpm}} = 0.001 \text{ m³/s} \]
+              \[T_{hot_out} = \frac{-191.6 \text{kJ/s}}{0.001 \text{ m³/s} * 1000 \frac{kg}{m³} * 4.18 \frac{kJ}{kg°C}} + 121\text{°C}\]
+              \[T_{hot_out} = 75.14\text{°C}\]
+            </P>
+        </div>
+        </div>
+      </div>
+      <br>
+
+    </div>
+    </div>
+  </div>
+</div>
+
+  <script src="scripts/index.js"></script>
+  <script src="scripts/unitConversions.js"></script>
+  <script src="scripts/heatExchanger.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+</body>
+</html>

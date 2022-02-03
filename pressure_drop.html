@@ -1,0 +1,570 @@
+<!-- Matthew Malone -->
+<!-- Last Updated 2/18/2021 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbox</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-11C4CME50R"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-11C4CME50R');
+   </script>
+   
+
+</head>
+<body>
+
+  <!--Navigation bar-->
+<div id="nav-placeholder"></div>
+<script>
+  $(document).ready(function(){   
+        $(function(){
+      $("#nav-placeholder").load("common/nav.html");
+    });
+   });
+</script>
+ 
+<!-- Calc Box -->
+  <div class="grid-section grid">
+    <div class="code-area">
+
+      <div class="box">
+        <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+          <div class="card-body">
+            <h2 class="title"> Pressure Drop Calculator</h2>
+
+            <fieldset>
+              <legend>Fluid Properties</legend>
+        
+                  <div class="row row-space" id="input-block-flow">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <label class="label">Flow Rate</label>
+                            <input class="input--style-4" type="number" value=60 step="1" name="flow_rate" id="input_flow">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="input-group">
+                        <label class="label transparent">Unit</label>
+                            <select class="input-style-1" name="unit" id="unit_flow">
+                                <option>lpm</option>
+                                <option>gpm</option>
+                            </select>
+                            <div class="select-dropdown"></div>
+                    </div>
+                    </div>
+                </div>
+        
+                
+        
+        
+            <div class="row row-space" id="input-block-density">
+                <div class="col-2">
+                    <div class="input-group">
+                        <label class="label">Fluid Density</label>
+                        <input class="input--style-4" type="number" value=1000 step="1" name="density" id="input_density">
+                    </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-group">
+                    <label class="label transparent">Unit</label>
+                        <select class="input-style-1" name="unit" id="unit_density">
+                            <option>kg/m³</option>
+                            <option>kg/L</option>
+                            <option>g/cm³</option>
+                            <option>lb/ft³</option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                </div>
+                </div>
+            </div>
+        
+            <div class="row row-space" id="input-block-viscosity">
+              <div class="col-2">
+                  <div class="input-group">
+                      <label class="label">Fluid Viscosity</label>
+                      <input class="input--style-4" type="number" value=1 step="1" name="viscosity" id="input_viscosity">
+                  </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label transparent">Unit</label>
+                      <select class="input-style-1" name="unit" id="unit_viscosity">
+                          <option>cP</option>
+                          <option>Pas</option>
+                          <option>lbm/ft/s</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+              </div>
+              </div>
+          </div>
+        
+        
+        </fieldset>
+          <fieldset>
+            <legend>Piping Properties</legend>
+
+
+          <div class="row row-space" id="input-block-length">
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">Pipe Length</label>
+                    <input class="input--style-4" type="number" value=100 step="1" name="flow_rate" id="input_length">
+                </div>
+            </div>
+            <div class="col-2">
+              <div class="input-group">
+                <label class="label transparent">Unit</label>
+                    <select class="input-style-1" name="unit" id="unit_length">
+                        <option>ft</option>
+                        <option>in</option>
+                        <option>miles</option>
+                        <option>m</option>
+                        <option>cm</option>
+                        <option>km</option>
+                    </select>
+                    <div class="select-dropdown"></div>
+            </div>
+            </div>
+        </div>
+
+
+
+        <div class="row row-space" id="input-block-length">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Elevation Rise</label>
+                  <input class="input--style-4" type="number" value=10 step="1" name="elevation" id="input_elevation">
+              </div>
+          </div>
+          <div class="col-2">
+            <div class="input-group">
+              <label class="label transparent">Unit</label>
+                  <select class="input-style-1" name="unit" id="unit_elevation">
+                      <option>ft</option>
+                      <option>in</option>
+                      <option>miles</option>
+                      <option>m</option>
+                      <option>cm</option>
+                      <option>km</option>
+                  </select>
+                  <div class="select-dropdown"></div>
+          </div>
+          </div>
+      </div>
+
+        <div class="row row-space" id="input-block-length">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Loss Coefficient</label>
+                  <input class="input--style-4" type="number" value=0 step="1" name="flow_rate" id="input_k">
+              </div>
+          </div>
+          <div class="col-2">
+            <div class="input-group">
+              <label class="label transparent">Unit</label>
+                  <select class="input-style-1" name="unit" id="unit_k">
+                      <option>unitless</option>
+                  </select>
+                  <div class="select-dropdown"></div>
+          </div>
+          </div>
+      </div>
+
+      <div class="row row-space" id="input-block-diameter">
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label">Outer Diameter</label>
+                <input class="input--style-4" type="number" value=1.5 step="0.5" name="flow_rate" id="input_diameter">
+            </div>
+        </div>
+
+        <div class="col-2">
+          <div class="input-group">
+            <label class="label transparent">Unit</label>
+                <select class="input-style-1" name="unit" id="unit_diameter">
+                    <option>in</option>
+                    <option>cm</option>
+                </select>
+                <div class="select-dropdown"></div>
+        </div>
+        </div>
+    </div>
+
+
+    <div class="row row-space" id="input-block-thickness">
+      <div class="col-2">
+          <div class="input-group">
+              <label class="label">Pipe Thickness</label>
+              <input class="input--style-4" type="number" value=0.065 step="0.001" name="flow_rate" id="input_thickness">
+          </div>
+      </div>
+      
+      <div class="col-2">
+        <div class="input-group">
+          <label class="label transparent">Unit</label>
+              <select class="input-style-1" name="unit" id="unit_thickness">
+                  <option>in</option>
+                  <option>cm</option>
+              </select>
+              <div class="select-dropdown"></div>
+      </div>
+      </div>
+  </div>
+
+
+  <div class="row row-space" id="input-block-roughness">
+    <div class="col-2">
+        <div class="input-group">
+            <label class="label">Surface Roughness</label>
+            <input class="input--style-4" type="number" value=5 step="0.1" name="viscosity" id="input_roughness">
+        </div>
+    </div>
+    <div class="col-2">
+      <div class="input-group">
+        <label class="label transparent">Unit</label>
+            <select class="input-style-1" name="unit" id="unit_roughness">
+                <option>μm</option>  
+                <option>mm</option>
+                <option>μin</option>
+                <option>in</option>
+            </select>
+            <div class="select-dropdown"></div>
+    </div>
+    </div>
+</div>
+
+    </fieldset>
+    
+
+
+<!-- Calc Button -->
+                <div class="button-row">
+                    <button class="btn btn--radius-2 btn--blue" onclick="solvePressureDrop()">Calculate</button>
+                </div>
+
+ <!-- Error Text -->
+ <div class="row row-space hidden" id="error-text-box">
+  <P id="error-text">Error</P>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Answer Block -->
+<div class="wrapper wrapper--w680 box hidden" id="answer-block">
+  <div class="card card-4">
+    <div class="card-body">
+      <h2 class="title"> Answer</h2>
+
+ 
+
+        <div class="row row-space" id="answer-block-flow">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Flow Regime</label>
+                  <label class="label--style-4" id="answer-1">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <label class="label--style-4">Unitless</label>
+
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+        <div class="row row-space" id="answer-block-dia">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Friction Factor</label>
+                  <label class="label--style-4" id="answer-frictionfact">0.5</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <label class="label--style-4">Unitless</label>
+
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+        
+
+        <div class="row row-space" id="answer-block-5">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Differential Pressure</label>
+                  <label class="label--style-4" id="answer-5">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <div class="select-dropdown"></div>
+                <select class="input-style-1" name="unit" id="unit_dP" onfocus="getAnswerPressUnit()" onchange="changeAnswerPressUnits()">
+                  <option>psi</option>
+                  <option>bar</option>
+                  <option>kPa</option>
+                  <option>inH₂O</option>
+              </select>
+               </div>
+            </div>
+        </div>
+
+  
+
+
+    </div>
+
+  </div>
+</div>
+
+  </div>
+  
+
+      <!-- Governing Equation Box -->
+        <div class="box white" id="equationDescription">
+          <div class="card-body-2">
+            <button class="accordion-header">Governing Equations</button>
+            <div class="accordian">
+              <P>The pressure drop calculator estimates the drop in pressure for a fluid flowing in a length of pipe. The Bernoulli Equation is used to determine pressure drop.  </P>
+
+              <h3>Bernoulli Equation</h3>
+              <p>
+                \[P_1 + {\rho}gh_1 + \frac{1}{2}{\rho}v_1^2  = P_2  + {\rho}gh_2  + \frac{1}{2}{\rho}v_2^2 + \left ( {f_d\frac{L}{d_i}} + \sum K \right )\frac{1}{2}{\rho}v^2  \]
+              </p>
+              <P>The Bernoulli Equation assumes the following: </P>
+    
+              <ul>
+                <li>
+                  -The start and end are connected through a fluid streamline
+                </li>
+                <li>
+                 -The fluid has constant density
+                </li>
+                <li>
+                 -The fluid flow rate is constant
+                </li>
+              </ul>
+    
+              <P>
+                To solve for pressure drop:
+    
+                \[P_1 - P_2 = {\rho}g \left (h_2-h_1\right ) + \frac{1}{2}{\rho} \left ( v_2^2 - v_1^2 \right ) + \left ( {f_d\frac{L}{d_i}} + \sum K \right )\frac{1}{2}{\rho}v^2  \]
+    
+              Simplify: 
+                \[P_1 - P_2 =  \Delta P  \]
+                \[h_2 - h_1 =  \Delta h  \]
+                \[v_2^2 - v_1^2  = 0     \]
+                \[\Delta P = {\rho}g \left (\Delta h\right ) + \left ( {f_d\frac{L}{d_i}} + \sum K \right )\frac{1}{2}{\rho}v^2  \]
+    
+              </p>
+              <h3>Loss Coefficient</h3>
+                <p>Each bend, valve, and fitting has a small amount of friction associated with it. It can be descriped as the loss coeffient. The sum of all the loss coefficents (ΣK) can be used in the Bernoulli Equation to find the pressure drop due to fittings. It is also known as the resistance coeffient. </p>
+                <p>Exact calculations for the loss coefficent for each type of valve and fitting can be found in the Crane Technical Paper 410: Flow of Fluids through Valves, Fittings, and Pipe. </p>
+
+              <h3>Surface Roughness</h3>
+
+              <p>The surface roughness depends on the pipe material. The table below gives typical roughnesses for specific materials</p>
+              <br>
+
+              <table>
+                <thead>
+                    <tr>
+                      <th class="table-header">Material</th>
+                      <th class="table-header">Surface Roughness</th> 
+                    </tr>
+                    <tr>
+                      <td>Stainless Steel</td>
+                      <td>5 μm</td>
+                    </tr>
+                    <tr>
+                      <td>Steel</td>
+                      <td>45 μm</td>
+                    </tr>
+                    <tr>
+                      <td>Galvanized Steel</td>
+                      <td>150 μm</td>
+                    </tr>
+                    <tr>
+                      <td>Aluminum</td>
+                      <td>1 μm</td>
+                    </tr>
+                    <tr>
+                      <td>Copper</td>
+                      <td>1 μm</td>
+                    </tr>
+                    <tr>
+                      <td>Brass</td>
+                      <td>1 μm</td>
+                    </tr>
+                    <tr>
+                      <td>PVC</td>
+                      <td>4 μm</td>
+                    </tr>
+                    <tr>
+                      <td>Cast Iron</td>
+                      <td>525 μm</td>
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+          
+          <h3>Definitions</h3>
+          <p>
+            \(\Delta P\) = Pressure drop
+            <br>
+            \(\rho\)	=	fluid density
+            <br>
+            g	=	acceleration due to gravity
+            <br>
+            \(\Delta h\) = Change in elevation. (Can be negative for a elevation drop)
+            <br>
+            ΣK = Loss coefficient for bends, valves, and fittings
+            <br>
+            \(f_d\)	=	friction factor
+            <br>
+            \(K\)	=	friction coefficient
+            <br>
+            \(v\)	=	fluid velocity
+            <br>
+            Q = fluid flow rate
+            <br>
+            \(d_o\) = pipe outer diameter
+            <br>
+            \(d_i\) = pipe inner diameter
+            <br>
+            \(x_w\) = pipe wall thickness
+            <br>
+            \(r_i\) = pipe inner radius
+            <br>
+            \(A_i\) = pipe inner cross-sectional area
+            <br>
+            μ = Fluid Dynamic Viscosity
+            </P>
+ 
+          </P>
+        </div>
+        </div>
+      </div>
+
+          <!-- Example Box -->
+          <div class="box white" id="applicationDescription">
+            <div class="card-body-2">
+            <button class="accordion-header">Example</button>
+            <div class="accordian">
+              <p>Find the drop in pressure for water (1000 kg/m³ and 1 cP) in a 1.5" OD stainless steel tube (0.065" wall thickness, 5um surface roughness) flowing at 60lpm in 100ft of tubing sloped at an angle so it rises 10ft without any bends, valves, or fittings.</p>
+              <P>
+                <P>Calculate inner pipe diameter:
+                \[ d_i = d_o - 2 \times x_w\] 
+                \[ d_i = 1.5" - 2\times0.065" = 1.37\text{ in}\] 
+                \[ d_i = 1.37\text{ in} \times  \frac{1\text{ ft}}{12\text{ in} } = 0.114 \text{ ft}\] 
+                Calculate inner pipe area:
+                \[A_i =  \pi \times r_i^2 = \pi \times \left(\frac{d_i}{2}\right)^2 \]
+                \[A_i = \pi \times \left(\frac{0.114\text{ ft}}{2}\right)^2 =0.01\text{ ft²} \]
+                Calculate fluid velocity:
+                \[v =  \frac{Q}{A_i}\]
+                \[v = \frac{60 \frac{L}{min} \times \frac{1 \text{ft³}}{28.3 \text{L}} \times \frac{60 sec}{min} }{0.01\text{ ft²}} = 3.45 \text{ ft/s}\]
+                Calculate Reynolds number:
+                \[ Re = \frac{v \times d_i \times \rho}{\mu}\]
+                \[ \rho = 1000 \text{ kg/m³} \times \frac{1 \text{lb/ft³}}{16.02 \text{ kg/m³}} = 62.4 \text{lb/ft³} \]
+                \[ \mu = 1 \text{ cP} \times \frac{\text{lb/ft/s}}{1488.16 \text{ cP}} = 0.00067 \text{lb/ft/s} \]
+                \[ Re = \frac{3.45 \text{ ft/s} \times 0.114 \text{ ft}\ \times 62.4 \text{lb/ft³}} {0.00067 \text{lb/ft/s}} \]
+                \[ Re = \text{36,589} \]
+                Determine flow regime:
+                \[ \text{Flow Regime = 36,589 > 4,000 = Turbulent} \]
+                Determine surface roughness of stainless steel:
+                \[ \text{k = 5μm} \times \frac{1 \text{ ft}}{304800 \text{ μm}} = 0.000016 \text{ ft}\]
+                Iterate the <a href="frictionfact.html">Colebrook equation</a> for friction factor
+                \[\frac{1}{\sqrt{f_d}}=-2log\left ( \frac{k}{3.72d_i}+\frac{2.51}{Re\sqrt{f_d}} \right )\]
+                \[f_d=\sqrt{\frac{1}{-2log\left ( \frac{k}{3.72d_i}+\frac{2.51}{Re\sqrt{f_d}} \right )}}= 0.24068\]
+                Separate the Bernoulli Equation into three sections and solve them individually:
+                \[\Delta P = {\rho}g \left (\Delta h\right ) + {f_d\frac{L}{d_i}}\frac{1}{2}{\rho}v^2 + \sum K \frac{1}{2}{\rho}v^2  \]
+                \[\Delta P_e = {\rho}g \left (\Delta h\right )  \]
+                \[\Delta P_l= {f_d\frac{L}{d_i}}\frac{1}{2}{\rho}v^2 \]
+                \[\Delta P_f =  \sum K \frac{1}{2}{\rho}v^2  \]
+                \[\Delta P =  \Delta P_e + \Delta P_l + \Delta P_f\]
+                Solve for differential pressure due to elevation changes
+                \[\Delta P_e = {\rho}g \left (\Delta h\right )  \]
+                \[\Delta P_e = 62.4 \text{lb/ft³} \times 10 \text{ft} = 624 \text{lb/ft²}\]
+                \[\Delta P_e = 624 \text{lb/ft²} \times \left( \frac{1 \text{ft²}}{144 \text{in²}} \right) = 4.3 \text{ psi}\]
+                Solve for differential pressure due to pipe length
+                \[\Delta P_l= {f_d\frac{L}{d_i}}\frac{1}{2}{\rho}v^2 \]
+                \[\Delta P_l= .241 \left( \frac{100 \text{ ft}}{0.114 \text{ ft}}  \right)\frac{62.4}{2} \frac{\text{lb}}{\text{ft³}} \left(  3.45 \frac{\text{ft}}{\text{s}} \right )^2 \]
+                \[\Delta P_l= 2434 \text{lb/ft²} \]
+                \[\Delta P_e = 2434 \text{lb/ft²} \times \left( \frac{1 \text{ft²}}{144 \text{in²}} \right) = 16.9\text{ psi}\]
+                Solve for differential pressure due to bends, valves, & fittings
+                \[\Delta P_l= {\sum K\frac{L}{d_i}}\frac{1}{2}{\rho}v^2 \]
+                \[\Delta P_l= 0 \left( \frac{100 \text{ ft}}{0.114 \text{ ft}}  \right)\left(\frac{62.4}{2} \frac{\text{lb}}{\text{ft³}} \right) \left(  3.45 \frac{\text{ft}}{\text{s}} \right )^2 \]
+                \[\Delta P_l= 0 \text{lb/ft²} \]
+                \[\Delta P_e= 0 \text{ psi}\]
+                Calculate total pressure drop
+                \[\Delta P =  \Delta P_e + \Delta P_l + \Delta P_f\]
+                \[\Delta P = 4.3 \text{ psi} + 16.9\text{ psi} + 0\text{ psi}\]
+                \[\Delta P =  21.2\text{ psi}\]
+ 
+              </P>
+              </P>
+          </div>
+          </div>
+        </div>
+
+        <!-- Applications Box -->
+        <div class="box white" id="applicationDescription">
+          <div class="card-body-2">
+          <button class="accordion-header">Applications</button>
+          <div class="accordian">
+
+          <h3>Pump Sizing</h3>
+          <p>The pressure drop calculator is useful for sizing pumps. Pump manufacturers require two main parameters to determine what type of pump is required and how large of a motor to install.
+          </p>
+          <br>
+          <p>
+            <strong>Flow Rate</strong> can be specifed by the process. (Example: I need 10 gallons per minute of water to keep up with production)
+          </p>
+          <br>
+          <p><strong>Pressure</strong> is more difficult to specify. It requires an understanding of the pipe system and fluid dynamics. Using the calculator, one can input the information about the system and fluid and calculate the expected pressure drop. By knowning how much pressure will drop through the system at the design flow rate, you know how much pressure output is required for the pump. 
+          </p>
+          <br>
+          <p>
+            You can use this information to size and purchase the appropriate pump for your application</p>
+    
+        </div>
+        </div>
+      </div>
+      <br>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="scripts/unitConversions.js"></script>
+  <script src="scripts/pressure_drop.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

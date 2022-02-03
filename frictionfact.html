@@ -1,0 +1,388 @@
+<!-- Matthew Malone -->
+<!-- Last Updated 2/18/2021 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbox</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-11C4CME50R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-11C4CME50R');
+  </script>
+  
+</head>
+<body>
+
+  <!--Navigation bar-->
+  <div id="nav-placeholder"></div>
+  <script>
+    $(document).ready(function(){   
+          $(function(){
+        $("#nav-placeholder").load("common/nav.html");
+      });
+     });
+  </script>
+
+
+ 
+<!-- Calc Box -->
+  <div class="grid-section grid">
+    <div class="code-area">
+
+      <div class="box">
+        <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+          <div class="card-body">
+            <h2 class="title"> Friction Factor Calculator</h2>
+
+
+          <div class="row row-space" id="input-block-flow">
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">Flow Rate</label>
+                    <input class="input--style-4" type="number" value=60 step="1" name="flow_rate" id="input_flow">
+                </div>
+            </div>
+            <div class="col-2">
+              <div class="input-group">
+                <label class="label transparent">Unit</label>
+                    <select class="input-style-1" name="unit" id="unit_flow">
+                        <option>lpm</option>
+                        <option>gpm</option>
+                    </select>
+                    <div class="select-dropdown"></div>
+            </div>
+            </div>
+        </div>
+
+        <div class="row row-space" id="input-block-diameter">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Outer Diameter</label>
+                  <input class="input--style-4" type="number" value=1.5 step="0.5" name="flow_rate" id="input_diameter">
+              </div>
+          </div>
+
+          <div class="col-2">
+            <div class="input-group">
+              <label class="label transparent">Unit</label>
+                  <select class="input-style-1" name="unit" id="unit_diameter">
+                      <option>in</option>
+                      <option>cm</option>
+                  </select>
+                  <div class="select-dropdown"></div>
+          </div>
+          </div>
+      </div>
+
+
+      <div class="row row-space" id="input-block-thickness">
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label">Pipe Thickness</label>
+                <input class="input--style-4" type="number" value=0.065 step="0.001" name="flow_rate" id="input_thickness">
+            </div>
+        </div>
+        
+        <div class="col-2">
+          <div class="input-group">
+            <label class="label transparent">Unit</label>
+                <select class="input-style-1" name="unit" id="unit_thickness">
+                    <option>in</option>
+                    <option>cm</option>
+                </select>
+                <div class="select-dropdown"></div>
+        </div>
+        </div>
+    </div>
+
+
+    <div class="row row-space" id="input-block-density">
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label">Fluid Density</label>
+                <input class="input--style-4" type="number" value=1000 step="1" name="density" id="input_density">
+            </div>
+        </div>
+        <div class="col-2">
+          <div class="input-group">
+            <label class="label transparent">Unit</label>
+                <select class="input-style-1" name="unit" id="unit_density">
+                    <option>kg/m³</option>
+                    <option>kg/L</option>
+                    <option>g/cm³</option>
+                    <option>lb/ft³</option>
+                </select>
+                <div class="select-dropdown"></div>
+        </div>
+        </div>
+    </div>
+
+    <div class="row row-space" id="input-block-viscosity">
+      <div class="col-2">
+          <div class="input-group">
+              <label class="label">Fluid Viscosity</label>
+              <input class="input--style-4" type="number" value=1 step="1" name="viscosity" id="input_viscosity">
+          </div>
+      </div>
+      <div class="col-2">
+        <div class="input-group">
+          <label class="label transparent">Unit</label>
+              <select class="input-style-1" name="unit" id="unit_viscosity">
+                  <option>cP</option>
+                  <option>Pas</option>
+                  <option>lbm/ft/s</option>
+              </select>
+              <div class="select-dropdown"></div>
+      </div>
+      </div>
+  </div>
+
+  <div class="row row-space" id="input-block-roughness">
+    <div class="col-2">
+        <div class="input-group">
+            <label class="label">Surface Roughness</label>
+            <input class="input--style-4" type="number" value=15 step="0.1" name="viscosity" id="input_roughness">
+        </div>
+    </div>
+    <div class="col-2">
+      <div class="input-group">
+        <label class="label transparent">Unit</label>
+            <select class="input-style-1" name="unit" id="unit_roughness">
+                <option>μm</option>
+                <option>μin</option>
+                <option>in</option>
+                <option>mm</option>
+            </select>
+            <div class="select-dropdown"></div>
+    </div>
+    </div>
+</div>
+
+
+<!-- Calc Button -->
+                <div class="button-row">
+                    <button class="btn btn--radius-2 btn--blue" onclick="solveFrictionFact()">Calculate</button>
+                </div>
+
+ <!-- Error Text -->
+ <div class="row row-space hidden" id="error-text-box">
+  <P id="error-text">Error</P>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Answer Block -->
+<div class="wrapper wrapper--w680 box hidden" id="answer-block">
+  <div class="card card-4">
+    <div class="card-body">
+      <h2 class="title"> Answer</h2>
+
+        <div class="row row-space" id="answer-block-vel">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Reynolds Number</label>
+                  <label class="label--style-4" id="answer-Re">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <label class="label--style-4">Unitless</label>
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+        <div class="row row-space" id="answer-block-flow">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Flow Regime</label>
+                  <label class="label--style-4" id="answer-regime">5.0</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <label class="label--style-4">Unitless</label>
+
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+        <div class="row row-space" id="answer-block-dia">
+          <div class="col-2">
+              <div class="input-group">
+                  <label class="label">Friction Factor</label>
+                  <label class="label--style-4" id="answer-frictionfact">0.5</label>
+              </div>
+          </div>
+             <div class="col-2">
+               <div class="input-group">
+                <label class="label transparent">Unit</label>
+                <label class="label--style-4">Unitless</label>
+
+                <div class="select-dropdown"></div>
+               </div>
+            </div>
+        </div>
+
+
+    </div>
+
+  </div>
+</div>
+
+  </div>
+  
+
+      <!-- Governing Equation Box -->
+        <div class="box white" id="equationDescription">
+          <div class="card-body-2">
+            <button class="accordion-header">Governing Equations</button>
+            <div class="accordian">
+          <P>The Darcy Friction Factor is a unitless factor which describes the amount of friction caused by incompressable fluids moving in a pipe. The calculation is differenent depending on the <a href="Reynolds.html">flow regime</a>.   </P>
+              <ul>
+                <li>
+                  <strong>Laminar Flow Regime</strong> Calculation of the friction factor is simple. 
+                  <p>
+                    \[f_d = 64/Re\]
+                   </p>
+                </li>
+                <li>
+                  <strong>Turbulent Flow Regime</strong> Calculation of the friction factor is complex. The Colebrook equation is used which uses iterative calculation. Friction factor is on both sides of the equation. This requires an inital guess on one side of the equation and multiple repated calculations until the answer converges. 
+                </li>
+                  <p>
+                    \[\frac{1}{\sqrt{f_d}}=-2log\left ( \frac{k}{3.72d_i}+\frac{2.51}{Re\sqrt{f_d}} \right )\]
+                  </p>
+                
+              </ul>
+              <P>
+                This calculator runs 10 iteratons of the Colebrook equation for turbulent flow, but it typically only takes 3 or 4 iterations to converge on a friction factor. If iteration is too difficult, several mathmatitans have developed <a href="https://en.wikipedia.org/wiki/Darcy_friction_factor_formulae"> approximations </a> of the Colebrook equation with varying accuracy. 
+                <br>
+                <br>
+                Alternatively, the friction factor can be determined graphically using the Moody Diagram.</P>
+              <img src="images/moodydiagram.jpeg" alt="Moody Diagram">
+
+          
+          <h3>Definitions</h3>
+          <P>
+            \(v\) = fluid velocity
+            <br>
+              Q = fluid flow rate
+              <br>
+              \(d_o\) = pipe outer diameter
+              <br>
+              \(d_i\) = pipe inner diameter
+              <br>
+              \(x_w\) = pipe wall thickness
+              <br>
+              \(r_i\) = pipe inner radius
+              <br>
+              \(A_i\) = pipe inner cross-sectional area
+              <br>
+              ρ = fluid density
+              <br>
+              μ = fluid dynamic viscosity
+              <br>
+              Re = reynolds dimentionless number
+              <br>
+              \(k\) = surface roughness
+          
+ 
+          </P>
+        </div>
+        </div>
+      </div>
+
+          <!-- Example Box -->
+          <div class="box white" id="applicationDescription">
+            <div class="card-body-2">
+            <button class="accordion-header">Example</button>
+            <div class="accordian">
+              <p>Find the friction factor for water (1000 kg/m³ and 1 cP) in a 1.5" OD stainless steel tube (0.065" wall thickness, 15um surface roughness) flowing at 60lpm.</p>
+              <P>
+                <P>Calculate inner pipe diameter:
+                \[ d_i = d_o - 2 \times x_w\] 
+                \[ d_i = 1.5" - 2\times0.065" = 1.37\text{ in}\] 
+                \[ d_i = 1.37\text{ in} \times  \frac{1\text{ ft}}{12\text{ in} } = 0.114 \text{ ft}\] 
+                Calculate inner pipe area:
+                \[A_i =  \pi \times r_i^2 = \pi \times \left(\frac{d_i}{2}\right)^2 \]
+                \[A_i = \pi \times \left(\frac{0.114\text{ ft}}{2}\right)^2 =0.01\text{ ft²} \]
+                Calculate fluid velocity:
+                \[v =  \frac{Q}{A_i}\]
+                \[v = \frac{60 \frac{L}{min} \times \frac{1 \text{ft³}}{28.3 \text{L}} \times \frac{60 sec}{min} }{0.01\text{ ft²}} = 3.45 \text{ ft/s}\]
+                Calculate Reynolds number:
+                \[ Re = \frac{v \times d_i \times \rho}{\mu}\]
+                \[ \rho = 1000 \text{ kg/m³} \times \frac{1 \text{lb/ft³}}{16.02 \text{ kg/m³}} = 62.4 \text{lb/ft³} \]
+                \[ \mu = 1 \text{ cP} \times \frac{\text{lb/ft/s}}{1488.16 \text{ cP}} = 0.00067 \text{lb/ft/s} \]
+                \[ Re = \frac{3.45 \text{ ft/s} \times 0.114 \text{ ft}\ \times 62.4 \text{lb/ft³}} {0.00067 \text{lb/ft/s}} \]
+                \[ Re = \text{36,589} \]
+                Determine flow regime:
+                \[ \text{Flow Regime = 36,589 > 4,000 = Turbulent} \]
+                Determine surface roughness of stainless steel:
+                \[ \text{k = 15μm} \times \frac{1 \text{ ft}}{304800 \text{ μm}} = 0.000049 \text{ ft}\]
+                Set up Colebrook equation
+                \[\frac{1}{\sqrt{f_d}}=-2log\left ( \frac{k}{3.72d_i}+\frac{2.51}{Re\sqrt{f_d}} \right )\]
+                \[f_d=\sqrt{\frac{1}{-2log\left ( \frac{k}{3.72d_i}+\frac{2.51}{Re\sqrt{f_d}} \right )}}\]
+                Make an inital guess for friction factor:
+                \[ f_d = 0.5 \]
+                Iteration 1
+                \[\sqrt{\frac{1}{-2log\left ( \frac{0.000049 \text{ ft}}{3.72*0.114 \text{ ft}}+\frac{2.51}{36,589\sqrt{0.5}} \right )}} = 0.24318\]
+                Iteration 2
+                \[\sqrt{\frac{1}{-2log\left ( \frac{0.000049 \text{ ft}}{3.72*0.114 \text{ ft}}+\frac{2.51}{36,589\sqrt{0.24318}} \right )}} = 0.24582\]
+                Iteration 3
+                \[\sqrt{\frac{1}{-2log\left ( \frac{0.000049 \text{ ft}}{3.72*0.114 \text{ ft}}+\frac{2.51}{36,589\sqrt{0.24582}} \right )}} = 0.24577\]
+                Iteration 4
+                \[\sqrt{\frac{1}{-2log\left ( \frac{0.000049 \text{ ft}}{3.72*0.114 \text{ ft}}+\frac{2.51}{36,589\sqrt{0.24577}} \right )}} = 0.24577\]
+                The Colbrook equation converged after 4 interations at 0.24577
+              </P>
+              </P>
+          </div>
+          </div>
+        </div>
+
+        <!-- Applications Box -->
+        <div class="box white" id="applicationDescription">
+          <div class="card-body-2">
+          <button class="accordion-header">Applications</button>
+          <div class="accordian">
+
+          <h3>Pressure Drop</h3>
+          <p>The Darcy friction factor is mainly used for determining the pressure drop of fluids flowing in a system (Bernoulli Equation).</p>
+          <h3>Fanning Friction Factor</h3>
+          <p>The Darcy frition factor can also be used to calculate the Fanning friction factor by dividing by 4.   
+          \[ f_f = \frac{f_d}{4}\]
+        </p>
+        </div>
+        </div>
+      </div>
+      <br>
+    </div>
+    </div>
+  </div>
+</div>
+
+  <script src="scripts/index.js"></script>
+  <script src="scripts/unitConversions.js"></script>
+  <script src="scripts/frictionfact.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>
